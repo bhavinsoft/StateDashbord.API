@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "FsW5tlWYeSXuxxtH8/QcM080sy1S0Z8jKAiw+w+qpwk=",
+  "Source": "StateDashbord.API",
+  "BasePath": "_content/StateDashbord.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
