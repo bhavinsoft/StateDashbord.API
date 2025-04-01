@@ -1,0 +1,17 @@
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\bin\Debug\net8.0\StateDashbord.Infrastructure.deps.json
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\bin\Debug\net8.0\StateDashbord.Infrastructure.dll
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\bin\Debug\net8.0\StateDashbord.Infrastructure.pdb
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\bin\Debug\net8.0\StateDashbord.Application.dll
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\bin\Debug\net8.0\StateDashbord.Domain.dll
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\bin\Debug\net8.0\StateDashbord.Application.pdb
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\bin\Debug\net8.0\StateDashbord.Domain.pdb
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\obj\Debug\net8.0\StateDashbord.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\obj\Debug\net8.0\StateDashbord.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\obj\Debug\net8.0\StateDashbord.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\obj\Debug\net8.0\StateDashbord.Infrastructure.AssemblyInfo.cs
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\obj\Debug\net8.0\StateDashbord.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\obj\Debug\net8.0\StateDas.F93512D0.Up2Date
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\obj\Debug\net8.0\StateDashbord.Infrastructure.dll
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\obj\Debug\net8.0\refint\StateDashbord.Infrastructure.dll
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\obj\Debug\net8.0\StateDashbord.Infrastructure.pdb
+C:\Users\Manan\source\repos\StateDashbord.API\StateDashbord.Infrastructure\obj\Debug\net8.0\ref\StateDashbord.Infrastructure.dll
