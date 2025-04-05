@@ -1,6 +1,7 @@
 using StateDashbord.Application.IRepository;
 using StateDashbord.Application.IService;
 using StateDashbord.Application.Service;
+using StateDashbord.Domain.Entities;
 using StateDashbord.Infrastructure.Persistence;
 using StateDashbord.Infrastructure.Repository;
 
@@ -21,6 +22,10 @@ builder.Services.AddTransient<IFriDetailsService, FriDetailsService>();
 builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddHttpClient<IFetchFriDetails, FetchFriDetails>();
 builder.Services.AddScoped(typeof(IGenericServices<>), typeof(GenericServices<>));
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+builder.Services.Configure<JwtSettings>(jwtSettings);
+
 
 var app = builder.Build();
 
