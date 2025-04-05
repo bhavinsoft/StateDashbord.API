@@ -9,6 +9,6 @@ namespace StateDashbord.Application.IService
 {
     public interface IFriDetailsService
     {
-        Task<int> sysFriDetails(FriRequest friRequest);
+        Task<Result<string>> sysFriDetails(FriRequest friRequest);
     }
 }

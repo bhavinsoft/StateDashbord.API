@@ -22,5 +22,7 @@ namespace StateDashbord.Application.IRepository
 
         //Task<List<T>> GetAsync(string spQuery, ref DynamicParameters dynamicParameters);
         Task<List<IEnumerable<dynamic>>> GetMultipleResultSetsAsync(string spQuery, Dictionary<string, object> parameters);
+
+        Task<int> Add(Dictionary<string, object> dictionary, string spQuery);
     }
 }

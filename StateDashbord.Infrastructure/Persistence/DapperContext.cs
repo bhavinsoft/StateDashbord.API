@@ -83,7 +83,7 @@ namespace StateDashbord.Infrastructure.Persistence
             }
         }
 
-        public async Task<bool> ExecuteWithoutResultAsync(string storedProcedureName, CommandType commandType, Dictionary<string, object> parameters = null, IDbTransaction dbTransaction = null)
+        public async Task<bool> ExecuteWithoutResultAsync(string storedProcedureName, CommandType commandType, DynamicParameters parameters = null, IDbTransaction dbTransaction = null)
         {
             try
             {
@@ -101,17 +101,35 @@ namespace StateDashbord.Infrastructure.Persistence
             }
         }
 
-        public async Task<int> ExecuteAndReturnIdAsync(string storedProcedureName, CommandType commandType, Dictionary<string, object> parameters = null, IDbTransaction dbTransaction = null)
+        public async Task<int> ExecuteAndReturnIdAsync(string storedProcedureName, CommandType commandType, Dictionary<string, object> dictionary = null, IDbTransaction dbTransaction = null)
         {
             try
             {
                 using (var dbConnection = CreateConnection())
                 {
+
                     await dbConnection.OpenAsync();
-                    return await dbConnection.ExecuteScalarAsync<int>(storedProcedureName, new DynamicParameters(parameters), dbTransaction, commandType: commandType);
+
+                    var dynamicParams = new DynamicParameters();
+
+                    // Add Input Parameters
+                    foreach (var param in dictionary)
+                    {
+                        dynamicParams.Add($"@{param.Key}", param.Value);
+                    }
+
+                     // Add Output Parameter
+                    dynamicParams.Add("@recid", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                    //return await dbConnection.ExecuteScalarAsync<int>(storedProcedureName, dynamicParams, dbTransaction, commandType: commandType);
+
+                    await dbConnection.ExecuteScalarAsync<int>(storedProcedureName, dynamicParams, dbTransaction, commandType: commandType);
+
+                    int recid = dynamicParams.Get<int>("@recid");
+                    return recid;
                 }
             }
-            catch (Exception ex)
+                catch (Exception ex)
             {
                 // ErrorLogger.Error($"Error in stored procedure => {storedProcedureName} \r\n CommandType = {commandType}", ex.ToString());
                 return -1;  // Return -1 to indicate failure

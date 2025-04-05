@@ -131,6 +131,11 @@ namespace StateDashbord.Infrastructure.Repository
             }
         }
 
+        public async Task<int> Add(Dictionary<string, object> dictionary, string spQuery)
+        {
+            return (await _dapperConnection.ExecuteAndReturnIdAsync(spQuery, CommandType.StoredProcedure, dictionary));
+        }
+
         //public async Task<List<T>> GetAsync(string spQuery, ref DynamicParameters dynamicParameters)
         //{
         //    try

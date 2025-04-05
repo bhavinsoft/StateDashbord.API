@@ -8,7 +8,7 @@ namespace StateDashbord.Domain.Entities
 {
     public class FriRequest
     {
-        public DateOnly from_date { get; set; }
-        public DateOnly to_date { get; set; }
+        public string from_date { get; set; }
+        public string to_date { get; set; }
     }
 }

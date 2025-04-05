@@ -2,7 +2,7 @@
   {
     "ContainingType": "StateDashbord.API.Controllers.FRIDetailsController",
     "Method": "SyaFRIData",
-    "RelativePath": "api/FRIDetails/SyaFRIData",
+    "RelativePath": "FRIDetails/SyaFRIData",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

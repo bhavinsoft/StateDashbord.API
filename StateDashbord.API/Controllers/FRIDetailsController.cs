@@ -5,8 +5,8 @@ using StateDashbord.Domain.Entities;
 
 namespace StateDashbord.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class FRIDetailsController : ControllerBase
     {
         private readonly IFriDetailsService _friDetailsService;
@@ -20,6 +20,9 @@ namespace StateDashbord.API.Controllers
         public async Task<IActionResult> SyaFRIData()
         {
             FriRequest friRequest = new FriRequest();
+            friRequest.from_date = "2020-01-01";
+
+            friRequest.to_date = "2020-01-01"; 
 
             var movieList = await _friDetailsService.sysFriDetails(friRequest);
             return Ok(movieList);

@@ -9,6 +9,7 @@ namespace StateDashbord.Application.IRepository
 {
     public interface IFriDetailsRepo
     {
-        Task<int> saveFriData(FRIDetailDto fridto);
+       Task saveFriData(FRIDetailDto fridto);
+        //Task<int> saveFriData(int  x);
     }
 }

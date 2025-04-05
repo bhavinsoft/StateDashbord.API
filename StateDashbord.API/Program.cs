@@ -1,4 +1,6 @@
 using StateDashbord.Application.IRepository;
+using StateDashbord.Application.IService;
+using StateDashbord.Application.Service;
 using StateDashbord.Infrastructure.Persistence;
 using StateDashbord.Infrastructure.Repository;
 
@@ -15,6 +17,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IFriDetailsRepo, FriDetailsRepo>();
 builder.Services.AddTransient<IFetchFriDetails, FetchFriDetails>();
+builder.Services.AddTransient<IFriDetailsService, FriDetailsService>();
 builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddHttpClient<IFetchFriDetails, FetchFriDetails>();
 builder.Services.AddScoped(typeof(IGenericServices<>), typeof(GenericServices<>));

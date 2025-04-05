@@ -10,6 +10,6 @@ namespace StateDashbord.Application.IRepository
 {
     public interface IFetchFriDetails
     {
-        Task<FRIDetailDto> FetchFriFromApi(FriRequest friRequest);
+        Task<Result<List<FRIDetailDto>>> FetchFriFromApi(FriRequest friRequest);
     }
 }
