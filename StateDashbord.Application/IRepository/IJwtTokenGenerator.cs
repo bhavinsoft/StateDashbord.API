@@ -1,4 +1,5 @@
-﻿using StateDashbord.Domain.Entities;
+﻿using StateDashbord.Application.Model;
+using StateDashbord.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace StateDashbord.Application.IRepository
 {
     public interface IJwtTokenGenerator
     {
-        string GenerateToken(User user);
+        string GenerateToken(usermasterDto user);
     }
 }

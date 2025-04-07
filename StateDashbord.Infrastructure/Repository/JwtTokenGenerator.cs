@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using StateDashbord.Application.IRepository;
+using StateDashbord.Application.Model;
 using StateDashbord.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace StateDashbord.Infrastructure.Repository
             _jwtSettings = jwtSettings.Value;
         }
 
-        public string GenerateToken(User user)
+        public string GenerateToken(usermasterDto user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Key);
@@ -31,7 +32,7 @@ namespace StateDashbord.Infrastructure.Repository
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Name, user.username),
                 new Claim(ClaimTypes.Role, user.rollid.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.DurationInMinutes),
