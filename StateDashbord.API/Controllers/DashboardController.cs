@@ -12,13 +12,25 @@ namespace StateDashbord.API.Controllers
     [Authorize]
     public class DashboardController : ControllerBase
     {
-      
-
-        public DashboardController(IFriDetailsService friDetailsService)
+        private readonly IDashboardService _dashboardService;
+        public DashboardController(IDashboardService dashboardService)
         {
-          
+            _dashboardService = dashboardService;
         }
 
-       
+        [HttpGet("GetDashboardCount")]
+        public async Task<ActionResult<DashbordCount>> GetDashboardCount(int userid, int userposition, int rollid)
+        {
+
+            var dashbordcountdata = await _dashboardService.getDashboardcountServicedata(userid, userposition, rollid);
+
+            if (dashbordcountdata?.data == null)
+            {
+                return NotFound(dashbordcountdata);
+            }
+            return Ok(dashbordcountdata);
+        }
+
+
     }
 }
