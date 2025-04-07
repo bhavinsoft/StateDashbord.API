@@ -23,7 +23,7 @@ namespace StateDashbord.API.Controllers
         public async Task<IActionResult> SyaFRIData(string from_date,string to_date)
         {
             FriRequest friRequest = new FriRequest();
-            friRequest.from_date = "from_date";
+            friRequest.from_date = from_date;
             friRequest.to_date = from_date; 
 
             var movieList = await _friDetailsService.sysFriDetails(friRequest);

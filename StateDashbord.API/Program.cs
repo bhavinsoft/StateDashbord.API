@@ -25,12 +25,17 @@ builder.Services.AddSwaggerGen(c =>
     // 🔐 JWT Auth setup
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
+        /* Name = "Authorization",
+       //  Type = SecuritySchemeType.ApiKey,
+         Type = SecuritySchemeType.Http,
+         Scheme = "Bearer",
+         BearerFormat = "JWT",
+         In = ParameterLocation.Header,
+         Description = "Enter 'Bearer' followed by space and token"*/
+        Name = "token",                          // Wrong: should be 'Authorization'
         In = ParameterLocation.Header,
-        Description = "Enter 'Bearer' followed by space and token"
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement {
@@ -67,6 +72,25 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            // Specify the custom header name for token verification
+            context.Token = context.Request.Headers["AccessKey"];
+            return Task.CompletedTask;
+        },
+        OnAuthenticationFailed = context =>
+        {
+            Console.WriteLine("❌ Auth failed: " + context.Exception.Message);
+            return Task.CompletedTask;
+        },
+        OnTokenValidated = context =>
+        {
+            Console.WriteLine("✅ Token validated!");
+            return Task.CompletedTask;
+        }
+    };
     options.RequireHttpsMetadata = false;
     options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
