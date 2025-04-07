@@ -9,7 +9,7 @@ namespace StateDashbord.Application.IService
 {
     public interface IDashboardService
     {
-        Task<List<DashbordCount>> getDashboardcountServicedata(int userid, int userposition, int rollid);
+        Task<Result<List<DashbordCount>>> getDashboardcountServicedata(int userid, int userposition, int rollid);
     }
    
 }

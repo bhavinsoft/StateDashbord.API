@@ -20,7 +20,7 @@ namespace StateDashbord.Application.Service
             _dashboardRepo = dashboardRepo;
         }
 
-        public async Task<List<DashbordCount>> getDashboardcountServicedata(int userid, int userposition, int rollid )
+        public async Task<Result<List<DashbordCount>>> getDashboardcountServicedata(int userid, int userposition, int rollid )
         {
           
             var dashboardcount = await _dashboardRepo.getDashboardcountdata(userid, userposition, rollid);
