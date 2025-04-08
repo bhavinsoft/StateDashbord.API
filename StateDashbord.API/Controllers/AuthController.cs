@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StateDashbord.Application.IService;
+using StateDashbord.Application.Model;
 using StateDashbord.Application.Service;
 using StateDashbord.Domain.Entities;
 
@@ -19,7 +20,7 @@ namespace StateDashbord.API.Controllers
         }
 
         [HttpGet("Login")]
-        public async Task<ActionResult<User>> Login(string usernaem,string password)
+        public async Task<ActionResult<usermasterDto>> Login(string usernaem,string password)
         {
       
             var userdata = await _userService.GetUserdatabyusernanepassword(usernaem, password);
