@@ -1,5 +1,6 @@
 ﻿using StateDashbord.Application.IRepository;
 using StateDashbord.Application.Model;
+using StateDashbord.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,10 +13,32 @@ namespace StateDashbord.Infrastructure.Repository
     public class FriDetailsRepo : IFriDetailsRepo
     {
         private readonly IGenericServices<FRIDetailDto> _friservicedata;
+        private readonly IGenericServices<FridataList> _fridatalist;
 
-        public FriDetailsRepo(IGenericServices<FRIDetailDto> friservicedata)
+        public FriDetailsRepo(IGenericServices<FRIDetailDto> friservicedata, IGenericServices<FridataList> fridatalist)
         {
             _friservicedata = friservicedata;
+            _fridatalist = fridatalist;
+        }
+
+        public async Task<Result<List<FridataList>>> getFriDataByType(int id, int userid, int userposition, int rollid)
+        {
+            try
+            {
+                Dictionary<string, object> fridatdis = new Dictionary<string, object>();
+                fridatdis.Add("id", id);
+                fridatdis.Add("userid", userid);
+                fridatdis.Add("userposition", userposition);
+                fridatdis.Add("rollid", rollid);
+                var fridat =await _fridatalist.GetAsync("getFridatabylype", fridatdis);
+                return Result<List<FridataList>>.SuccessResult(fridat, "fechdata succesfull", 1);
+            }
+            catch (Exception ex)
+            {
+
+               return Result<List<FridataList>>.FailureResult($"An error occurred: {ex.Message}", 0);
+            }
+           
         }
 
         public async Task saveFriData(FRIDetailDto fRIDetailDto)
