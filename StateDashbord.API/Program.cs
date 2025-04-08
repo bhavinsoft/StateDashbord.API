@@ -59,6 +59,8 @@ builder.Services.AddTransient<IFriDetailsService, FriDetailsService>();
 builder.Services.AddTransient<IUserMasterRepo, UserMasterRepo>();
 builder.Services.AddTransient<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IDashboardRepo, DashboardRepo>();
+builder.Services.AddTransient<IDashboardService, DashboardService>();
 builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddHttpClient<IFetchFriDetails, FetchFriDetails>();
 builder.Services.AddScoped(typeof(IGenericServices<>), typeof(GenericServices<>));
