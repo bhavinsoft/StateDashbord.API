@@ -10,6 +10,6 @@ namespace StateDashbord.Application.IRepository
 {
     public interface IJwtTokenGenerator
     {
-        string GenerateToken(usermasterDto user);
+        string GenerateToken(User user);
     }
 }

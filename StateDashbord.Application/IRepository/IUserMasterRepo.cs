@@ -10,7 +10,7 @@ namespace StateDashbord.Application.IRepository
 {
     public interface IUserMasterRepo
     {
-       Task<Result<usermasterDto>> GetUserdatabyusernanepassword(string  username,string  password);
+       Task<Result<User>> GetUserdatabyusernanepassword(string  username,string  password);
        
     }
 }

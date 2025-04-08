@@ -15,6 +15,7 @@ namespace StateDashbord.Application.Model
         public string? emilid { get; set; }
         public string? mobileno { get; set; }
         public int? rollid { get; set; }
+        public string? token { get; set; }
 
     }
 }

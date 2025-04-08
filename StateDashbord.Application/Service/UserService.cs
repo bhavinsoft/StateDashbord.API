@@ -22,16 +22,16 @@ namespace StateDashbord.Application.Service
             _jwtTokenGenerator = jwtTokenGenerator;
         }
 
-        public async Task<Result<User>> GetUserdatabyusernanepassword(string username, string password)
+        public async Task<Result<usermasterDto>> GetUserdatabyusernanepassword(string username, string password)
         {
             var userdto= await _usermasterRepo.GetUserdatabyusernanepassword(username, password);
             if (userdto?.data == null)
             {
-                  return Result<User>.FailureResult($"user data not found", 0); // or handle appropriately
+                  return Result<usermasterDto>.FailureResult($"user data not found", 0); // or handle appropriately
             }
 
             var token = _jwtTokenGenerator.GenerateToken(userdto.data);
-            var userdata = new User
+            var userdata = new usermasterDto
             {
                 recid = userdto.data.recid,
                 username = userdto.data.username,
@@ -42,7 +42,7 @@ namespace StateDashbord.Application.Service
                 
             };
 
-            return Result<User>.SuccessResult(userdata, "fechdata succesfull", 1);
+            return Result<usermasterDto>.SuccessResult(userdata, "fechdata succesfull", 1);
 
 
         }

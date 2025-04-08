@@ -24,7 +24,7 @@ namespace StateDashbord.Infrastructure.Repository
             _jwtSettings = jwtSettings.Value;
         }
 
-        public string GenerateToken(usermasterDto user)
+        public string GenerateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Key);

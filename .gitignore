@@ -114,3 +114,15 @@
 /StateDashbord.API/obj/Debug/net8.0/StateDashbord.API.csproj.FileListAbsolute.txt
 /StateDashbord.API/obj/Debug/net8.0/StateDashbord.API.genruntimeconfig.cache
 /StateDashbord.API/obj/StateDashbord.API.csproj.nuget.g.props
+/StateDashbord.API/bin/Release/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
+/StateDashbord.API/bin/Release/net8.0/runtimes/win/lib/net8.0/System.Windows.Extensions.dll
+/StateDashbord.API/bin/Release/net8.0/runtimes/win-x64/native/comerr64.dll
+/StateDashbord.API/bin/Release/net8.0/runtimes/win-x64/native/gssapi64.dll
+/StateDashbord.API/bin/Release/net8.0/runtimes/win-x64/native/k5sprt64.dll
+/StateDashbord.API/bin/Release/net8.0/runtimes/win-x64/native/krb5_64.dll
+/StateDashbord.API/bin/Release/net8.0/runtimes/win-x64/native/krbcc64.dll
+/StateDashbord.API/bin/Release/net8.0/appsettings.Development.json
+/StateDashbord.API/bin/Release/net8.0/appsettings.json
+/StateDashbord.API/bin/Release/net8.0/BouncyCastle.Cryptography.dll
+/StateDashbord.API/bin/Release/net8.0/Dapper.dll
+/StateDashbord.API/bin/Release/net8.0/Google.Protobuf.dll

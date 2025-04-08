@@ -21,24 +21,17 @@ namespace StateDashbord.API.Controllers
             _logger = logger;
         }
 
-        //[HttpGet(Name = "GetWeatherForecast")]
-        //public IEnumerable<WeatherForecast> Get()
-        //{
-        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        //    {
-        //        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-        //        TemperatureC = Random.Shared.Next(-20, 55),
-        //        Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        //    })
-        //    .ToArray();
-        //}
-        [HttpPost(Name = "getuserdata")]
-        public async Task<ActionResult<User>> getuserdata([FromBody] User user)
+        [HttpGet(Name = "GetWeatherForecast")]
+        public IEnumerable<WeatherForecast> Get()
         {
-            User user1 = new User();
-
-            return Ok(user1);
-
+           return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                TemperatureC = Random.Shared.Next(-20, 55),
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+            })
+            .ToArray();
         }
+       
     }
 }

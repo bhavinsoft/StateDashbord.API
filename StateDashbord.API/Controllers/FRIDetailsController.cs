@@ -19,8 +19,8 @@ namespace StateDashbord.API.Controllers
             _friDetailsService = friDetailsService;
         }
 
-        [HttpGet("SyaFRIData")]
-        public async Task<IActionResult> SyaFRIData(string from_date,string to_date)
+        [HttpGet("SysFRIData")]
+        public async Task<IActionResult> SysFRIData(string from_date,string to_date)
         {
             FriRequest friRequest = new FriRequest();
             friRequest.from_date = from_date;

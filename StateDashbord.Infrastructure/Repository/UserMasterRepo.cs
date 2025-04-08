@@ -12,14 +12,14 @@ namespace StateDashbord.Infrastructure.Repository
 {
     public class UserMasterRepo : IUserMasterRepo
     {
-        private readonly IGenericServices<usermasterDto> _usermserdata;
+        private readonly IGenericServices<User> _usermserdata;
 
-        public UserMasterRepo(IGenericServices<usermasterDto> usermserdata)
+        public UserMasterRepo(IGenericServices<User> usermserdata)
         {
             _usermserdata = usermserdata;
         }
 
-        public async Task<Result<usermasterDto>> GetUserdatabyusernanepassword(string username, string password)
+        public async Task<Result<User>> GetUserdatabyusernanepassword(string username, string password)
         {
             try
             {
@@ -31,11 +31,11 @@ namespace StateDashbord.Infrastructure.Repository
 
                 if (userdata != null)
                 {
-                    return Result<usermasterDto>.SuccessResult(userdata, "fechdata succesfull", 1);
+                    return Result<User>.SuccessResult(userdata, "fechdata succesfull", 1);
                 }
                 else
                 {
-                    return Result<usermasterDto>.FailureResult($"user data not found", 0);
+                    return Result<User>.FailureResult($"user data not found", 0);
 
                 }
 
@@ -43,7 +43,7 @@ namespace StateDashbord.Infrastructure.Repository
             catch (Exception ex)
             {
                 //  Console.WriteLine($"An error occurred: {ex.Message}");
-                return Result<usermasterDto>.FailureResult($"An error occurred: {ex.Message}", 0);
+                return Result<User>.FailureResult($"An error occurred: {ex.Message}", 0);
 
             }
         }

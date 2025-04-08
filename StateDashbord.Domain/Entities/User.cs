@@ -16,7 +16,7 @@ namespace StateDashbord.Domain.Entities
         public string password { get; set; }
         public string? emilid { get; set; }
         public string? mobileno { get; set; }
-        public string? token { get; set; }
+        
         public int? rollid { get; set; }
 
     
