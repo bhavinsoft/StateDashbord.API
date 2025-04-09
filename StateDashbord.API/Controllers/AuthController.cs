@@ -20,7 +20,7 @@ namespace StateDashbord.API.Controllers
         }
 
         [HttpGet("Login")]
-        public async Task<ActionResult<usermasterDto>> Login(string usernaem,string password)
+        public async Task<ActionResult<Result<usermasterDto>>> Login(string usernaem,string password)
         {
       
             var userdata = await _userService.GetUserdatabyusernanepassword(usernaem, password);

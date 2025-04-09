@@ -19,7 +19,7 @@ namespace StateDashbord.API.Controllers
         }
 
         [HttpGet("GetDashboardCount")]
-        public async Task<ActionResult<DashbordCount>> GetDashboardCount(int userid, int userposition, int rollid)
+        public async Task<ActionResult<Result<List<DashbordCount>>>> GetDashboardCount(int userid, int userposition, int rollid)
         {
 
             var dashbordcountdata = await _dashboardService.getDashboardcountServicedata(userid, userposition, rollid);

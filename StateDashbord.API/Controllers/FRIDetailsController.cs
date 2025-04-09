@@ -32,7 +32,7 @@ namespace StateDashbord.API.Controllers
 
 
         [HttpGet("GetFRIdataList")]
-        public async Task<ActionResult<FridataListDto>> GetFRIdataListByType(int id, int userid, int userposition, int rollid)
+        public async Task<ActionResult<Result<List<FridataListDto>>>> GetFRIdataListByType(int id, int userid, int userposition, int rollid)
         {
             var movieList = await _friDetailsService.getFriDataByType(id, userid, userposition, rollid);
             return Ok(movieList);
