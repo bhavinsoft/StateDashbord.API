@@ -23,6 +23,24 @@ namespace StateDashbord.Application.Service
 
 
         }
+
+        public async Task<Result<List<FridataListDto>>> getFriDataByType(int id, int userid, int userposition, int rollid)
+        {
+            var result = await _FriDetails.getFriDataByType(id, userid, userposition, rollid);
+
+            var frilistDtoList = result.data.Select(x => new FridataListDto
+             {
+                recid = x.recid,
+                ps_cd = x.ps_cd,
+                ps_name = x.ps_name,
+                fir_reg_num = x.fir_reg_num,
+                reg_dt = x.reg_dt,
+
+            }).ToList();
+
+            return Result<List<FridataListDto>>.SuccessResult(frilistDtoList, "fechdata succesfull", 1);
+        }
+
         public async Task<Result<string>> sysFriDetails(FriRequest friRequest)
         {
             try

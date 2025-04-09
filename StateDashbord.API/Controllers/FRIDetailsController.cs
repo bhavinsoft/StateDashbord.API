@@ -29,5 +29,13 @@ namespace StateDashbord.API.Controllers
             var movieList = await _friDetailsService.sysFriDetails(friRequest);
             return Ok(movieList);
         }
+
+
+        [HttpGet("GetFRIdataList")]
+        public async Task<ActionResult<FridataListDto>> GetFRIdataListByType(int id, int userid, int userposition, int rollid)
+        {
+            var movieList = await _friDetailsService.getFriDataByType(id, userid, userposition, rollid);
+            return Ok(movieList);
+        }
     }
 }
