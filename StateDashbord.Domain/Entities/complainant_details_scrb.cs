@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StateDashbord.Domain.Entities
 {
-    public class User
+    public class complainant_details_scrb
     {
         public int recid { get; set; }
         public string? fullname { get; set; }
