@@ -56,6 +56,7 @@ namespace StateDashbord.Infrastructure.Repository
             PS_Details.Add("latitude", fRIDetailDto.PS_Details_SCRB.latitude);
             PS_Details.Add("longitude", fRIDetailDto.PS_Details_SCRB.longitude);
             PS_Details.Add("crimehead_desc_guj", fRIDetailDto.PS_Details_SCRB.crimehead_desc_guj);
+            PS_Details.Add("crimehead_id", fRIDetailDto.PS_Details_SCRB.crimehead_id);
             PS_Details.Add("fir_gist_regional", fRIDetailDto.PS_Details_SCRB.fir_gist_regional);
 
 
