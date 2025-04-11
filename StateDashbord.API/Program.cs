@@ -5,6 +5,7 @@ using StateDashbord.Application.IRepository;
 using StateDashbord.Application.IService;
 using StateDashbord.Application.Service;
 using StateDashbord.Domain.Entities;
+using StateDashbord.Infrastructure.Infrastructure;
 using StateDashbord.Infrastructure.Persistence;
 using StateDashbord.Infrastructure.Repository;
 using System.Text;
@@ -52,18 +53,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
+builder.Services.AddInfrastructure();
 
-builder.Services.AddTransient<IFriDetailsRepo, FriDetailsRepo>();
-builder.Services.AddTransient<IFetchFriDetails, FetchFriDetails>();
-builder.Services.AddTransient<IFriDetailsService, FriDetailsService>();
-builder.Services.AddTransient<IUserMasterRepo, UserMasterRepo>();
-builder.Services.AddTransient<IJwtTokenGenerator, JwtTokenGenerator>();
-builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<IDashboardRepo, DashboardRepo>();
-builder.Services.AddTransient<IDashboardService, DashboardService>();
-builder.Services.AddSingleton<DapperContext>();
-builder.Services.AddHttpClient<IFetchFriDetails, FetchFriDetails>();
-builder.Services.AddScoped(typeof(IGenericServices<>), typeof(GenericServices<>));
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 builder.Services.Configure<JwtSettings>(jwtSettings);
