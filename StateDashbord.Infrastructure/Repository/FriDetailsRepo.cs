@@ -14,11 +14,56 @@ namespace StateDashbord.Infrastructure.Repository
     {
         private readonly IGenericServices<FRIDetailDto> _friservicedata;
         private readonly IGenericServices<FridataList> _fridatalist;
+        private readonly IGenericServices<fridetailsmaster> _fridetailsmaster;
+        private readonly IGenericServices<actdetails> _actdetails;
 
-        public FriDetailsRepo(IGenericServices<FRIDetailDto> friservicedata, IGenericServices<FridataList> fridatalist)
+        public FriDetailsRepo(IGenericServices<FRIDetailDto> friservicedata, 
+            IGenericServices<FridataList> fridatalist, 
+            IGenericServices<fridetailsmaster> fridetailsmaster,
+            IGenericServices<actdetails> actdetails)
         {
             _friservicedata = friservicedata;
             _fridatalist = fridatalist;
+            _fridetailsmaster = fridetailsmaster;    
+            _actdetails = actdetails;
+        }
+
+        public async Task<Result<fridetails>> getFriDataByid(int id, int userid, int userposition, int rollid)
+        {
+            fridetails objfridetails = new fridetails();
+
+            try
+            {
+
+                Dictionary<string, object> fridata = new Dictionary<string, object>();
+                fridata.Add("id", id);
+
+                objfridetails.fridetailsmaster = await  _fridetailsmaster.GetFirstOrDefaultAsync("getFridetails", fridata);
+
+                if (objfridetails.fridetailsmaster!= null)
+                {
+
+                    objfridetails.acts = await  _actdetails.GetAsync("getactdetailsbyfriid", fridata);
+
+
+                    return Result<fridetails>.SuccessResult(objfridetails, "fechdata succesfull", 1);
+
+                }
+                else
+                {
+
+                    return Result<fridetails>.FailureResult($"data not found", 0);
+
+                }
+
+              
+            }
+            catch (Exception ex)
+            {
+                return Result<fridetails>.FailureResult($"An error occurred: {ex.Message}", 0);
+
+            }
+
         }
 
         public async Task<Result<List<FridataList>>> getFriDataByType(int id, int userid, int userposition, int rollid)

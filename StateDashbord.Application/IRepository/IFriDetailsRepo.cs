@@ -13,6 +13,7 @@ namespace StateDashbord.Application.IRepository
        Task saveFriData(FRIDetailDto fridto);
 
         Task<Result<List<FridataList>>> getFriDataByType(int id, int userid, int userposition, int rollid);
+        Task<Result<fridetails>> getFriDataByid(int id, int userid, int userposition, int rollid);
         //Task<int> saveFriData(int  x);
     }
 }
