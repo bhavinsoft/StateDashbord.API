@@ -16,16 +16,32 @@ namespace StateDashbord.Infrastructure.Repository
         private readonly IGenericServices<FridataList> _fridatalist;
         private readonly IGenericServices<fridetailsmaster> _fridetailsmaster;
         private readonly IGenericServices<actdetails> _actdetails;
+        private readonly IGenericServices<accused_list> _accused_list;
+        private readonly IGenericServices<complainant_details_scrb> _complainantdetailsscrb;
+        private readonly IGenericServices<occurrence_of_offence> _occurrenceofoffence;
+        private readonly IGenericServices<investigating_officer> _investigatingofficer;
+        private readonly IGenericServices<visiting_details_scrb> _visitingdetailsscrb;
 
         public FriDetailsRepo(IGenericServices<FRIDetailDto> friservicedata, 
             IGenericServices<FridataList> fridatalist, 
             IGenericServices<fridetailsmaster> fridetailsmaster,
-            IGenericServices<actdetails> actdetails)
+            IGenericServices<actdetails> actdetails
+           ,IGenericServices<accused_list> accused_list
+           ,IGenericServices<complainant_details_scrb> complainantdetailsscrb
+           ,IGenericServices<occurrence_of_offence> occurrenceofoffence
+           ,IGenericServices<investigating_officer > investigatingofficer
+            , IGenericServices<visiting_details_scrb> visitingdetailsscrb
+            )
         {
             _friservicedata = friservicedata;
             _fridatalist = fridatalist;
             _fridetailsmaster = fridetailsmaster;    
             _actdetails = actdetails;
+            _accused_list= accused_list;
+            _complainantdetailsscrb =complainantdetailsscrb;
+            _occurrenceofoffence = occurrenceofoffence;
+            _investigatingofficer = investigatingofficer;
+            _visitingdetailsscrb = visitingdetailsscrb;
         }
 
         public async Task<Result<fridetails>> getFriDataByid(int id, int userid, int userposition, int rollid)
@@ -44,6 +60,11 @@ namespace StateDashbord.Infrastructure.Repository
                 {
 
                     objfridetails.acts = await  _actdetails.GetAsync("getactdetailsbyfriid", fridata);
+                    objfridetails.accused_Lists = await  _accused_list.GetAsync("getaccused_listbyfriid", fridata);
+                    objfridetails.complainan_detail_sscrb = await _complainantdetailsscrb.GetFirstOrDefaultAsync("getcomplainant_details_scrbbyfriid", fridata);
+                    objfridetails.occurrence_Of_Offence = await _occurrenceofoffence.GetFirstOrDefaultAsync("getoccurrence_of_offencebyfriid", fridata);
+                    objfridetails.investigating_Officer = await _investigatingofficer.GetFirstOrDefaultAsync("getInvestigating_Officerbyfriid", fridata);
+                    objfridetails.visiting_details_scrb = await _visitingdetailsscrb.GetFirstOrDefaultAsync("getvisiting_details_scrbbyfriid", fridata);
 
 
                     return Result<fridetails>.SuccessResult(objfridetails, "fechdata succesfull", 1);

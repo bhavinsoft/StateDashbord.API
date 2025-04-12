@@ -10,15 +10,14 @@ namespace StateDashbord.Domain.Entities
 {
     public class accused_list
     {
-        public int recid { get; set; }
-        public string? fullname { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string? emilid { get; set; }
-        public string? mobileno { get; set; }
-        
-        public int? rollid { get; set; }
+        public string? accused_name { get; set; }
+        public string? accused_name_regional { get; set; }
+        public string? accused_age { get; set; }
+        public string? accused_pres_addr { get; set; }
+        public string? accused_pres_addr_regional { get; set; }
+        public string? accused_national_gender_cd { get; set; }
+        public string? accused_occupation { get; set; }
 
-    
+
     }
 }

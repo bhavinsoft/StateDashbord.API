@@ -9,7 +9,7 @@ namespace StateDashbord.Application.Model
 {
     public class FRIDetailDto
     {
-        public FRIDetailmasterDto PS_Details_SCRB { get; set; }
+        public FRIDetailmasterDto? PS_Details_SCRB { get; set; }
         public List<ActDetailsDto>? acts { get; set; }
         public ComplainantDetailsDto? Complainant_Details_SCRB { get; set; }
         public OccurrenceDetailsDto? Occurrence_of_Offence { get; set; }

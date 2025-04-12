@@ -1,4 +1,5 @@
-﻿using StateDashbord.Domain.Entities;
+﻿using StateDashbord.Application.Model;
+using StateDashbord.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace StateDashbord.Application.IService
     {
         Task<Result<string>> sysFriDetails(FriRequest friRequest);
         Task<Result<List<FridataListDto>>> getFriDataByType(int id, int userid, int userposition, int rollid);
+        Task<Result<FRIDetailDto>> getFriDataByid(int id, int userid, int userposition, int rollid);
+
     }
 }

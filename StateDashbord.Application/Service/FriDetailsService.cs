@@ -24,6 +24,38 @@ namespace StateDashbord.Application.Service
 
         }
 
+        public async Task<Result<FRIDetailDto>> getFriDataByid(int id, int userid, int userposition, int rollid)
+        {
+            try
+            {
+                var fridata = await _FriDetails.getFriDataByid(id, userid, userposition, rollid);
+                var fRIDetailDto = new FRIDetailDto
+                {
+                    PS_Details_SCRB = new FRIDetailmasterDto
+                    {
+                        ps_cd = fridata.data.fridetailsmaster?.ps_cd
+                    },
+                    acts = fridata.data.acts?.Select(x => new ActDetailsDto
+                    {
+                        act_id = x.act_id,
+                        section_code = x.section_code,
+                        act_desc = x.act_desc,
+                        section_desc = x.section_desc
+
+
+                    }).ToList(),
+                  
+                };
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            throw new NotImplementedException();
+        }
+
         public async Task<Result<List<FridataListDto>>> getFriDataByType(int id, int userid, int userposition, int rollid)
         {
             var result = await _FriDetails.getFriDataByType(id, userid, userposition, rollid);

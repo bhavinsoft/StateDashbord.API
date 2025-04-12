@@ -10,15 +10,12 @@ namespace StateDashbord.Domain.Entities
 {
     public class actdetails
     {
-        public int recid { get; set; }
-        public string? fullname { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string? emilid { get; set; }
-        public string? mobileno { get; set; }
-        
-        public int? rollid { get; set; }
-
-    
+        public string? act_id { get; set; }
+        public string? section_code { get; set; }
+        public string? act_desc { get; set; }
+        public string? section_desc { get; set; }
     }
+
+
+
 }
