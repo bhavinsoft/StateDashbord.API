@@ -20,10 +20,10 @@ namespace StateDashbord.Application.Service
             _dashboardRepo = dashboardRepo;
         }
 
-        public async Task<Result<List<DashbordCount>>> getDashboardcountServicedata(int userid, int userposition, int rollid )
+        public async Task<Result<List<DashbordCount>>> getDashboardcountServicedata(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
         {
           
-            var dashboardcount = await _dashboardRepo.getDashboardcountdata(userid, userposition, rollid);
+            var dashboardcount = await _dashboardRepo.getDashboardcountdata(userid, userposition, rollid,from_date,to_date);
 
 
             return Result<List<DashbordCount>>.SuccessResult(dashboardcount.data, "fechdata succesfull", 1);

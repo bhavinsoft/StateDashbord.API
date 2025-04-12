@@ -10,7 +10,7 @@ namespace StateDashbord.Application.IRepository
 {
     public interface IDashboardRepo
     {
-       Task<Result<List<DashbordCount>>> getDashboardcountdata(int userid,int userposition,int rollid);
+       Task<Result<List<DashbordCount>>> getDashboardcountdata(int userid,int userposition,int rollid, DateOnly? from_date, DateOnly? to_date);
        
     }
 }

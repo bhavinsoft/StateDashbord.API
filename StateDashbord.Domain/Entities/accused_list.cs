@@ -10,6 +10,7 @@ namespace StateDashbord.Domain.Entities
 {
     public class accused_list
     {
+        public int recid { get; set; }
         public string? accused_name { get; set; }
         public string? accused_name_regional { get; set; }
         public string? accused_age { get; set; }
@@ -17,7 +18,7 @@ namespace StateDashbord.Domain.Entities
         public string? accused_pres_addr_regional { get; set; }
         public string? accused_national_gender_cd { get; set; }
         public string? accused_occupation { get; set; }
-
+        public int? friid { get; set; }
 
     }
 }

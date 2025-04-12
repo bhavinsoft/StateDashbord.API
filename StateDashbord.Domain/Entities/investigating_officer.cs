@@ -11,14 +11,11 @@ namespace StateDashbord.Domain.Entities
     public class investigating_officer
     {
         public int recid { get; set; }
-        public string? fullname { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string? emilid { get; set; }
-        public string? mobileno { get; set; }
-        
-        public int? rollid { get; set; }
+        public string? io_rank { get; set; }
+        public string? io_name { get; set; }
+        public string? io_name_regional { get; set; }
+        public int? friid { get; set; }
 
-    
+
     }
 }

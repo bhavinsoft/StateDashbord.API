@@ -11,7 +11,7 @@ namespace StateDashbord.Application.IService
     public interface IFriDetailsService
     {
         Task<Result<string>> sysFriDetails(FriRequest friRequest);
-        Task<Result<List<FridataListDto>>> getFriDataByType(int id, int userid, int userposition, int rollid);
+        Task<Result<List<FridataListDto>>> getFriDataByType(int id, int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
         Task<Result<FRIDetailDto>> getFriDataByid(int id, int userid, int userposition, int rollid);
 
     }

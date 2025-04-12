@@ -54,7 +54,7 @@ namespace StateDashbord.Infrastructure.Repository
                 Dictionary<string, object> fridata = new Dictionary<string, object>();
                 fridata.Add("id", id);
 
-                objfridetails.fridetailsmaster = await  _fridetailsmaster.GetFirstOrDefaultAsync("getFridetails", fridata);
+                objfridetails.fridetailsmaster = await  _fridetailsmaster.GetFirstOrDefaultAsync("getfridatabyid", fridata);
 
                 if (objfridetails.fridetailsmaster!= null)
                 {
@@ -87,7 +87,7 @@ namespace StateDashbord.Infrastructure.Repository
 
         }
 
-        public async Task<Result<List<FridataList>>> getFriDataByType(int id, int userid, int userposition, int rollid)
+        public async Task<Result<List<FridataList>>> getFriDataByType(int id, int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
         {
             try
             {

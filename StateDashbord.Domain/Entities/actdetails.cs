@@ -10,10 +10,13 @@ namespace StateDashbord.Domain.Entities
 {
     public class actdetails
     {
+
+        public int recid { get; set; }
         public string? act_id { get; set; }
         public string? section_code { get; set; }
         public string? act_desc { get; set; }
         public string? section_desc { get; set; }
+        public int? friid { get; set; }
     }
 
 

@@ -26,14 +26,33 @@ namespace StateDashbord.Application.Service
 
         public async Task<Result<FRIDetailDto>> getFriDataByid(int id, int userid, int userposition, int rollid)
         {
-            try
-            {
+          
                 var fridata = await _FriDetails.getFriDataByid(id, userid, userposition, rollid);
                 var fRIDetailDto = new FRIDetailDto
                 {
                     PS_Details_SCRB = new FRIDetailmasterDto
                     {
-                        ps_cd = fridata.data.fridetailsmaster?.ps_cd
+                        recid  = fridata.data.fridetailsmaster?.recid,
+                        ps_cd = fridata.data.fridetailsmaster?.ps_cd,
+                        ps_name =  fridata.data.fridetailsmaster?.ps_name,
+                        fir_reg_num =fridata.data.fridetailsmaster?.fir_reg_num,
+                        reg_dt =fridata.data.fridetailsmaster?.reg_dt,
+                        state_name =fridata.data.fridetailsmaster?.state_name,
+                        city_district_name  =fridata.data.fridetailsmaster?.city_district_name,
+                        city_district_cd =fridata.data.fridetailsmaster?.city_district_cd,
+                        address =fridata.data.fridetailsmaster?.address,
+                        latitude =fridata.data.fridetailsmaster?.latitude,
+                        longitude =fridata.data.fridetailsmaster?.longitude,
+                        crimehead_desc_guj =fridata.data.fridetailsmaster?.crimehead_desc_guj,
+                        crimehead_id =fridata.data.fridetailsmaster?.crimehead_id,
+                        fir_gist_regional =fridata.data.fridetailsmaster?.fir_gist_regional
+                    },
+                    Occurrence_of_Offence = new OccurrenceDetailsDto
+                    { 
+                        to_dt= fridata.data.occurrence_Of_Offence?.to_dt,
+                        from_time = fridata.data.occurrence_Of_Offence?.from_time,
+                        from_dt = fridata.data.occurrence_Of_Offence?.from_dt,
+                        to_time = fridata.data.occurrence_Of_Offence?.to_time,
                     },
                     acts = fridata.data.acts?.Select(x => new ActDetailsDto
                     {
@@ -41,24 +60,54 @@ namespace StateDashbord.Application.Service
                         section_code = x.section_code,
                         act_desc = x.act_desc,
                         section_desc = x.section_desc
-
-
                     }).ToList(),
+                    Complainant_Details_SCRB = new ComplainantDetailsDto
+                    {
+                        comp_name = fridata.data.complainan_detail_sscrb?.comp_name,
+                        comp_name_regional = fridata.data.complainan_detail_sscrb?.comp_name_regional,
+                        comp_pres_address = fridata.data.complainan_detail_sscrb?.comp_pres_address,
+                        comp_pres_address_regional = fridata.data.complainan_detail_sscrb?.comp_pres_address_regional,
+                        mobileno = fridata.data.complainan_detail_sscrb?.mobileno,
+
+                    },
+                    Investigating_Officer = new InvestigatingOfficerDto
+                    {
+                        io_rank = fridata.data.investigating_Officer?.io_rank,
+                        io_name = fridata.data.investigating_Officer?.io_name,
+                        io_name_regional = fridata.data.investigating_Officer?.io_name_regional,
+
+
+                    },
+                    Visiting_Details_SCRB =new VisitingDetailsDto
+                    {
+                        visiting_offcr_name = fridata.data.visiting_details_scrb?.visiting_offcr_name,
+                        visiting_offcr_dsgn = fridata.data.visiting_details_scrb?.visiting_offcr_dsgn,
+                        visiting_date = fridata.data.visiting_details_scrb?.visiting_date,
+                        visiting_time = fridata.data.visiting_details_scrb?.visiting_time
+
+                    },
+                    accused_list = fridata.data.accused_Lists?.Select( x=>  new AccusedDetailsDto
+                    {
+                        accused_name =x.accused_name,
+                        accused_name_regional =x.accused_name_regional,
+                        accused_age=x.accused_age,
+                        accused_pres_addr=x.accused_pres_addr,
+                        accused_pres_addr_regional =x.accused_pres_addr_regional,
+                        accused_national_gender_cd = x.accused_national_gender_cd,
+                        accused_occupation = x.accused_occupation
+
+                    }).ToList()
                   
                 };
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
 
-            throw new NotImplementedException();
+            return Result<FRIDetailDto>.SuccessResult(fRIDetailDto, "fechdata succesfull", 1);
+
         }
 
-        public async Task<Result<List<FridataListDto>>> getFriDataByType(int id, int userid, int userposition, int rollid)
+        public async Task<Result<List<FridataListDto>>> getFriDataByType(int id, int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
         {
-            var result = await _FriDetails.getFriDataByType(id, userid, userposition, rollid);
+            var result = await _FriDetails.getFriDataByType(id, userid, userposition, rollid,from_date,to_date);
 
             var frilistDtoList = result.data.Select(x => new FridataListDto
              {

@@ -10,12 +10,13 @@ namespace StateDashbord.Domain.Entities
 {
     public class complainant_details_scrb
     {
+        public int recid { get; set; }
         public string? comp_pres_address { get; set; }
         public string? comp_pres_address_regional { get; set; }
         public string? comp_name { get; set; }
         public string? comp_name_regional { get; set; }
         public string? mobileno { get; set; }
-
+        public int? friid { get; set; }
 
     }
 }

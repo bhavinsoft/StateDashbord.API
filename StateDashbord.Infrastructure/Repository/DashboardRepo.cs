@@ -19,7 +19,7 @@ namespace StateDashbord.Infrastructure.Repository
             _dashbordcoutdata = dashbordcoutdata;
         }
 
-        public async Task<Result<List<DashbordCount>>> getDashboardcountdata(int userid, int userposition, int rollid)
+        public async Task<Result<List<DashbordCount>>> getDashboardcountdata(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
         {
             try
             {

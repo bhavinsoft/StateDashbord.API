@@ -11,14 +11,11 @@ namespace StateDashbord.Domain.Entities
     public class occurrence_of_offence
     {
         public int recid { get; set; }
-        public string? fullname { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string? emilid { get; set; }
-        public string? mobileno { get; set; }
-        
-        public int? rollid { get; set; }
+        public string? to_dt { get; set; }
+        public string? from_time { get; set; }
+        public string? from_dt { get; set; }
+        public string? to_time { get; set; }
+        public int? friid { get; set; }
 
-    
     }
 }
