@@ -271,3 +271,14 @@
 /StateDashbord.Infrastructure/obj/Release/net8.0/StateDashbord.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
 /StateDashbord.Infrastructure/obj/Release/net8.0/StateDashbord.Infrastructure.pdb
 /StateDashbord.API/obj/Release/net8.0/PublishOutputs.1a80926504.txt
+/StateDashbord.Infrastructure/obj/StateDashbord.Infrastructure.csproj.nuget.g.targets
+/StateDashbord.API/bin/Release/net8.0/NLog.Web.AspNetCore.dll
+/StateDashbord.API/bin/Release/net8.0/NLog.Extensions.Logging.dll
+/StateDashbord.API/bin/Release/net8.0/NLog.dll
+/StateDashbord.API/bin/Debug/net8.0/NLog.Web.AspNetCore.dll
+/StateDashbord.API/obj/Release/net8.0/PubTmp/Out/NLog.dll
+/StateDashbord.API/obj/StateDashbord.API.csproj.nuget.g.targets
+/StateDashbord.API/obj/Release/net8.0/PubTmp/Out/NLog.Web.AspNetCore.dll
+/StateDashbord.API/obj/Release/net8.0/PubTmp/Out/NLog.Extensions.Logging.dll
+/StateDashbord.API/bin/Debug/net8.0/NLog.Extensions.Logging.dll
+/StateDashbord.API/bin/Debug/net8.0/NLog.dll

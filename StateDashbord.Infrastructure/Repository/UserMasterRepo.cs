@@ -1,4 +1,5 @@
-﻿using StateDashbord.Application.IRepository;
+﻿using Microsoft.Extensions.Logging;
+using StateDashbord.Application.IRepository;
 using StateDashbord.Application.Model;
 using StateDashbord.Domain.Entities;
 using System;
@@ -14,15 +15,20 @@ namespace StateDashbord.Infrastructure.Repository
     {
         private readonly IGenericServices<usermaster> _usermserdata;
 
-        public UserMasterRepo(IGenericServices<usermaster> usermserdata)
+        private readonly ILogger<UserMasterRepo> _logger;
+
+        public UserMasterRepo(IGenericServices<usermaster> usermserdata
+            ,ILogger<UserMasterRepo> logger)
         {
             _usermserdata = usermserdata;
+            _logger = logger;
         }
 
         public async Task<Result<usermaster>> GetUserdatabyusernanepassword(string username, string password)
         {
             try
             {
+                _logger.LogInformation("Test log from IIS site");
                 Dictionary<string, object> PS_Details = new Dictionary<string, object>();
                 PS_Details.Add("username", username);
                 PS_Details.Add("password", password);

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NLog;
+using NLog.Web;
 using StateDashbord.Application.IRepository;
 using StateDashbord.Application.IService;
 using StateDashbord.Application.Service;
@@ -10,11 +12,21 @@ using StateDashbord.Infrastructure.Persistence;
 using StateDashbord.Infrastructure.Repository;
 using System.Text;
 
-var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var logger = NLog.LogManager.Setup().LoadConfigurationFromFile("Nlog.config").GetCurrentClassLogger();
+try
+{
+    logger.Debug("Starting up...");
 
-builder.Services.AddControllers();
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.Logging.ClearProviders();
+    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace); // Optional: change to Info if needed
+    builder.Host.UseNLog(); // 🔥 THIS is the key line
+
+    // Add services to the container.
+
+    builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
@@ -117,3 +129,14 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+}
+catch (Exception ex)
+{
+
+    logger.Error(ex, "Application stopped due to exception");
+    throw;
+}
+finally
+{
+    NLog.LogManager.Shutdown();
+}
