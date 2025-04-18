@@ -28,7 +28,7 @@ namespace StateDashbord.Infrastructure.Repository
         {
             try
             {
-                _logger.LogInformation("Test log from IIS site");
+           
                 Dictionary<string, object> PS_Details = new Dictionary<string, object>();
                 PS_Details.Add("username", username);
                 PS_Details.Add("password", password);
@@ -49,6 +49,7 @@ namespace StateDashbord.Infrastructure.Repository
             catch (Exception ex)
             {
                 //  Console.WriteLine($"An error occurred: {ex.Message}");
+                _logger.LogError($"GetUserdatabyusernanepassword {ex.Message} ");
                 return Result<usermaster>.FailureResult($"An error occurred: {ex.Message}", 0);
 
             }

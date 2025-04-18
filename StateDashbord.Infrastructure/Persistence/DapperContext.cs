@@ -8,6 +8,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using StateDashbord.Infrastructure.Repository;
 
 namespace StateDashbord.Infrastructure.Persistence
 {
@@ -15,11 +17,14 @@ namespace StateDashbord.Infrastructure.Persistence
     {
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
+        private readonly ILogger<DapperContext> _logger;
 
-        public DapperContext(IConfiguration configuration)
+        public DapperContext(IConfiguration configuration
+             , ILogger<DapperContext> logger)
         {
             _configuration = configuration;
             _connectionString = _configuration.GetConnectionString("MySqlConnection");
+            _logger = logger;
         }
 
         public DbConnection CreateConnection() => new MySqlConnection(_connectionString);
@@ -36,6 +41,7 @@ namespace StateDashbord.Infrastructure.Persistence
             }
             catch (Exception ex)
             {
+                _logger.LogError($"ExecuteQueryAsync {ex.Message} ");
                 // Log error
                 // ErrorLogger.Error($"Error in query => {query} \r\n CommandType = {commandType}", ex.ToString());
                 throw;
@@ -49,12 +55,24 @@ namespace StateDashbord.Infrastructure.Persistence
 
         public async Task<IEnumerable<T>> GetMultipleListResultAsync<T>(string query, CommandType commandType, List<Dictionary<string, object>> parametersList, IDbTransaction dbTransaction = null)
         {
-            var results = new List<T>();
-            foreach (var parameters in parametersList)
+            try
             {
-                results.AddRange(await ExecuteQueryAsync<T>(query, new DynamicParameters(parameters), commandType, dbTransaction));
+                var results = new List<T>();
+                foreach (var parameters in parametersList)
+                {
+                    results.AddRange(await ExecuteQueryAsync<T>(query, new DynamicParameters(parameters), commandType, dbTransaction));
+                }
+                return results;
+
             }
-            return results;
+            catch (Exception ex)
+            {
+                _logger.LogError($"GetDynamicMultipleResultSetsAsync {ex.Message} ");
+
+
+                throw;
+            }
+           
         }
 
         public async Task<List<IEnumerable<dynamic>>> GetDynamicMultipleResultSetsAsync(string spQuery, Dictionary<string, object> parameters)
@@ -78,6 +96,7 @@ namespace StateDashbord.Infrastructure.Persistence
             }
             catch (Exception ex)
             {
+                _logger.LogError($"GetDynamicMultipleResultSetsAsync {ex.Message} ");
                 // ErrorLogger.Error($"Error in {spQuery}", ex.ToString());
                 throw;
             }
@@ -96,6 +115,8 @@ namespace StateDashbord.Infrastructure.Persistence
             }
             catch (Exception ex)
             {
+                _logger.LogError($"ExecuteWithoutResultAsync {ex.Message} ");
+
                 // ErrorLogger.Error($"Error in stored procedure => {storedProcedureName} \r\n CommandType = {commandType}", ex.ToString());
                 return false;
             }
@@ -129,8 +150,10 @@ namespace StateDashbord.Infrastructure.Persistence
                     return recid;
                 }
             }
-                catch (Exception ex)
+            catch (Exception ex)
             {
+                _logger.LogError($"ExecuteWithoutResultAsync {ex.Message} ");
+
                 // ErrorLogger.Error($"Error in stored procedure => {storedProcedureName} \r\n CommandType = {commandType}", ex.ToString());
                 return -1;  // Return -1 to indicate failure
             }

@@ -96,8 +96,8 @@ namespace StateDashbord.Infrastructure.Repository
                 fridatdis.Add("userid", userid);
                 fridatdis.Add("userposition", userposition);
                 fridatdis.Add("rollid", rollid);
-                fridatdis.Add("from_date", from_date);
-                fridatdis.Add("to_date", to_date);
+                fridatdis.Add("from_date", from_date?.ToString("yyyy-MM-dd"));
+                fridatdis.Add("to_date", to_date?.ToString("yyyy-MM-dd"));
                 var fridat =await _fridatalist.GetAsync("getFridatabytype", fridatdis);
                 return Result<List<FridataList>>.SuccessResult(fridat, "fechdata succesfull", 1);
             }
@@ -107,6 +107,27 @@ namespace StateDashbord.Infrastructure.Repository
                return Result<List<FridataList>>.FailureResult($"An error occurred: {ex.Message}", 0);
             }
            
+        }
+
+        public async Task<Result<List<FridataList>>> getFriDataByTypeformap(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            try
+            {
+                Dictionary<string, object> fridatdis = new Dictionary<string, object>();
+               ;
+                fridatdis.Add("userid", userid);
+                fridatdis.Add("userposition", userposition);
+                fridatdis.Add("rollid", rollid);
+                fridatdis.Add("from_date", from_date?.ToString("yyyy-MM-dd"));
+                fridatdis.Add("to_date", to_date?.ToString("yyyy-MM-dd"));
+                var fridat = await _fridatalist.GetAsync("getFridatabytypeformap", fridatdis);
+                return Result<List<FridataList>>.SuccessResult(fridat, "fechdata succesfull", 1);
+            }
+            catch (Exception ex)
+            {
+
+                return Result<List<FridataList>>.FailureResult($"An error occurred: {ex.Message}", 0);
+            }
         }
 
         public async Task saveFriData(FRIDetailDto fRIDetailDto)
@@ -131,7 +152,7 @@ namespace StateDashbord.Infrastructure.Repository
             var friid = await _friservicedata.Add(PS_Details, "InsertFridetails");
 
 
-            if (friid != 0)
+            if (friid > 0)
             {
                 foreach (var act in fRIDetailDto.acts)
                 {

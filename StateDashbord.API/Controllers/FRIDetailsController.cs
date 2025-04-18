@@ -21,7 +21,7 @@ namespace StateDashbord.API.Controllers
         }
 
         [HttpGet("SysFRIData")]
-        public async Task<IActionResult> SysFRIData(string from_date,string to_date)
+        public async Task<IActionResult> SysFRIData(DateOnly? from_date, DateOnly? to_date)
         {
             FriRequest friRequest = new FriRequest();
             friRequest.from_date = from_date;
@@ -37,6 +37,13 @@ namespace StateDashbord.API.Controllers
         {
             var fridata = await _friDetailsService.getFriDataByType(id, userid, userposition, rollid, from_date, to_date);
             return Ok(fridata); 
+        }
+
+        [HttpGet("GetFRIdataListformap")]
+        public async Task<ActionResult<Result<List<FridataListDto>>>> GetFRIdataListformap(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            var fridata = await _friDetailsService.getFriDataByTypeformap( userid, userposition, rollid, from_date, to_date);
+            return Ok(fridata);
         }
 
         [HttpGet("GetFRIdatabyid")]

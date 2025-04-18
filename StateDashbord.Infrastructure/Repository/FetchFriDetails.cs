@@ -1,6 +1,8 @@
-﻿using StateDashbord.Application.IRepository;
+﻿using Microsoft.Extensions.Logging;
+using StateDashbord.Application.IRepository;
 using StateDashbord.Application.Model;
 using StateDashbord.Domain.Entities;
+using StateDashbord.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +16,13 @@ namespace StateDashbord.Infrastructure.Repository
     {
 
         private readonly HttpClient _httpClient;
-        public FetchFriDetails(HttpClient httpClient)
+        private readonly ILogger<FetchFriDetails> _logger;
+
+        public FetchFriDetails(HttpClient httpClient,
+           ILogger<FetchFriDetails> logger)
         {
             _httpClient = httpClient;
-
+            _logger = logger;
 
         }
         public async Task<Result<List<FRIDetailDto>>> FetchFriFromApi(FriRequest friRequest)
@@ -59,19 +64,23 @@ namespace StateDashbord.Infrastructure.Repository
                 };
                 var movieList = JsonSerializer.Deserialize<List<FRIDetailDto>>(content, options);
                
+               _logger.LogInformation($"Data fetched successfully: {movieList.Count.ToString()}");
                 return Result<List<FRIDetailDto>>.SuccessResult(movieList,"fechdata succesfull",1);
             }
             catch (TaskCanceledException ex) when (!cts.Token.IsCancellationRequested)
             {
 
-                Console.WriteLine("The request timed out.");
+               // Console.WriteLine("The request timed out.");
+                _logger.LogError($"The request timed out.");
+
                 return Result<List<FRIDetailDto>>.FailureResult(ex.ToString(), 0);
 
             }
             catch (Exception ex)
             {
+                _logger.LogError($"An error occurred API CALL : {ex.Message}");
 
-                Console.WriteLine($"An error occurred: {ex.Message}");
+              //  Console.WriteLine($"An error occurred: {ex.Message}");
                 return Result<List<FRIDetailDto>>.FailureResult(ex.ToString(), 0);
 
             }
