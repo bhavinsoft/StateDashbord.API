@@ -96,7 +96,9 @@ namespace StateDashbord.Infrastructure.Repository
                 fridatdis.Add("userid", userid);
                 fridatdis.Add("userposition", userposition);
                 fridatdis.Add("rollid", rollid);
-                var fridat =await _fridatalist.GetAsync("getFridatabylype", fridatdis);
+                fridatdis.Add("from_date", from_date);
+                fridatdis.Add("to_date", to_date);
+                var fridat =await _fridatalist.GetAsync("getFridatabytype", fridatdis);
                 return Result<List<FridataList>>.SuccessResult(fridat, "fechdata succesfull", 1);
             }
             catch (Exception ex)

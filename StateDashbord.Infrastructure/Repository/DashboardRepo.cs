@@ -27,6 +27,8 @@ namespace StateDashbord.Infrastructure.Repository
                 dashboardcountdis.Add("userid", userid);
                 dashboardcountdis.Add("userposition", userposition);
                 dashboardcountdis.Add("rollid", rollid);
+                dashboardcountdis.Add("from_date", from_date);
+                dashboardcountdis.Add("to_date", to_date);
                 var dashborddata = await _dashbordcoutdata.GetAsync("dashbosrdcount", dashboardcountdis);
                 return Result<List<DashbordCount>>.SuccessResult(dashborddata, "fechdata succesfull", 1);
 

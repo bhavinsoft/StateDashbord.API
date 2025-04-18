@@ -24,7 +24,7 @@ namespace StateDashbord.API.Controllers
         {
       
             var userdata = await _userService.GetUserdatabyusernanepassword(usernaem, password);
-            if (userdata?.data == null)
+            if (userdata == null)
             {
                 return NotFound(userdata);
             }

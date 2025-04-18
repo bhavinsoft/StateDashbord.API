@@ -116,7 +116,8 @@ namespace StateDashbord.Application.Service
                 ps_name = x.ps_name,
                 fir_reg_num = x.fir_reg_num,
                 reg_dt = x.reg_dt,
-
+                city_district_name =x.city_district_name,
+                crimehead_desc_guj =x.crimehead_desc_guj
             }).ToList();
 
             return Result<List<FridataListDto>>.SuccessResult(frilistDtoList, "fechdata succesfull", 1);

@@ -33,10 +33,10 @@ namespace StateDashbord.API.Controllers
 
 
         [HttpGet("GetFRIdataList")]
-        public async Task<ActionResult<Result<List<FridataListDto>>>> GetFRIdataListByType(int id, int userid, int userposition, int rollid, DateOnly from_date, DateOnly to_date)
+        public async Task<ActionResult<Result<List<FridataListDto>>>> GetFRIdataListByType(int id, int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
         {
             var fridata = await _friDetailsService.getFriDataByType(id, userid, userposition, rollid, from_date, to_date);
-            return Ok(fridata);
+            return Ok(fridata); 
         }
 
         [HttpGet("GetFRIdatabyid")]

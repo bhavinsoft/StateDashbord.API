@@ -14,7 +14,7 @@ namespace StateDashbord.Domain.Entities
         public string message { get; set; }
 
 
-        public static Result<T> SuccessResult( T data, string message, int sucess_code=1) => new Result<T> { sucess = true, sucess_code = sucess_code, data = data };
-        public static Result<T> FailureResult(string message, int sucess_code=0) => new Result<T> { sucess = false, sucess_code = sucess_code};
+        public static Result<T> SuccessResult( T data, string message, int sucess_code=1) => new Result<T> { sucess = true, message = message, sucess_code = sucess_code, data = data };
+        public static Result<T> FailureResult(string message, int sucess_code=0) => new Result<T> { sucess = false,message =message, sucess_code = sucess_code};
     }
 }
