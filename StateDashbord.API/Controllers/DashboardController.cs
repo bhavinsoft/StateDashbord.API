@@ -31,6 +31,18 @@ namespace StateDashbord.API.Controllers
             return Ok(dashbordcountdata);
         }
 
+        [HttpGet("GetDashboardCountotherinfo")]
+        public async Task<ActionResult<Result<List<DashbordCount>>>> GetDashboardCountotherinfo(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+
+            var dashbordcountdataother = await _dashboardService.getDashboardcountServicedataotherinfo(userid, userposition, rollid, from_date, to_date);
+
+            if (dashbordcountdataother?.data == null)
+            {
+                return NotFound(dashbordcountdataother);
+            }
+            return Ok(dashbordcountdataother);
+        }
 
     }
 }

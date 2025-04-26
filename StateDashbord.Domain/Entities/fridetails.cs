@@ -15,6 +15,9 @@ namespace StateDashbord.Domain.Entities
         public investigating_officer? investigating_Officer { get; set; }
         public List<accused_list>? accused_Lists { get; set; }
         public visiting_details_scrb? visiting_details_scrb { get; set; }
+        public additional_information? additional_information { get; set; }
+        public List<additional_accused_list>? additional_accused_list { get; set; }
+        public List<additional_officer_visit>? additional_officer_visit { get; set; }
 
     }
 }

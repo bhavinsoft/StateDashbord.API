@@ -16,8 +16,11 @@ namespace StateDashbord.Application.Model
         public InvestigatingOfficerDto? Investigating_Officer { get; set; }
         public List<AccusedDetailsDto>? accused_list { get; set; }
         public VisitingDetailsDto? Visiting_Details_SCRB { get; set; }
+        public additional_informationDto? additional_information { get; set; }
+        public List<additional_accused_listDto>? additional_accused_list { get; set; }
+        public List<additional_officer_visitDto>? additional_officer_visit { get; set; }
     }
-  
+
 
     public class FRIDetailmasterDto
     {
@@ -86,5 +89,55 @@ namespace StateDashbord.Application.Model
         public string? visiting_offcr_dsgn { get; set; }
         public string? visiting_date { get; set; }
         public string? visiting_time { get; set; }
+    }
+
+    public class additional_informationDto
+    {
+        public int recid { get; set; }
+        public bool? if_criminal_history { get; set; }
+        public string?  if_criminal_history_text { get; set; }
+        public bool? if_media_sensational { get; set; }
+        public string? if_media_sensational_text { get; set; }
+        public bool? if_complaint_against_PG { get; set; }
+        public string? if_complaint_against_PG_text { get; set; }
+        public bool? if_affect_law { get; set; }
+        public string? if_affect_law_text { get; set; }
+        public bool? if_arresting_accused_affect_law { get; set; }
+        public string? if_arresting_accused_affect_law_text { get; set; }
+        public bool? if_accused_arrested { get; set; }
+        public string ? if_accused_arrested_text { get; set; }
+        public string? accused_arrested_reason { get; set; }
+        public bool? if_media_link { get; set; }
+        public string? if_media_link_text { get; set; }
+        public string? media_link { get; set; }
+        public bool? if_social_media_link { get; set; }
+        public string? if_social_media_link_text { get; set; }
+        public string? social_media_link { get; set; }
+        public bool? if_e_evidence_used { get; set; }
+        public string? if_e_evidence_used_text { get; set; }
+        public int? friid { get; set; }
+        
+    }
+
+    public class additional_accused_listDto
+    {
+        public int recid { get; set; }
+        public string? additional_accused_name { get; set; }
+        public string? additional_accused_address { get; set; }
+        public string? additional_accused_mobileNo { get; set; }
+        public int? friid { get; set; }
+
+    }
+
+    public class additional_officer_visitDto
+    {
+        public int recid { get; set; }
+        public string? additional_officer_name { get; set; }
+        public string? additional_officer_designation { get; set; }
+        public string? additional_officer_mobileno { get; set; }
+        public DateTime? visit_date { get; set; }
+        public string? visit_time { get; set; }
+        public int? friid { get; set; }
+
     }
 }

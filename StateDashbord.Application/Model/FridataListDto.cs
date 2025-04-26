@@ -15,8 +15,12 @@ namespace StateDashbord.Domain.Entities
         public string? ps_name { get; set; }
         public string? fir_reg_num { get; set; }
         public string? reg_dt { get; set; }
+        public string? address { get; set; }
         public string? city_district_name { get; set; }
         public string? crimehead_desc_guj { get; set; }
+        public string? fir_gist_regional { get; set; }
+        public string? latitude { get; set; }
+        public string? longitude { get; set; }
 
     }
 }

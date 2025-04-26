@@ -21,6 +21,9 @@ namespace StateDashbord.Infrastructure.Repository
         private readonly IGenericServices<occurrence_of_offence> _occurrenceofoffence;
         private readonly IGenericServices<investigating_officer> _investigatingofficer;
         private readonly IGenericServices<visiting_details_scrb> _visitingdetailsscrb;
+        private readonly IGenericServices<additional_information> _additionalinformation;
+        private readonly IGenericServices<additional_accused_list> _additionalaccusedlist;
+        private readonly IGenericServices<additional_officer_visit> _additionalofficervisit;
 
         public FriDetailsRepo(IGenericServices<FRIDetailDto> friservicedata, 
             IGenericServices<FridataList> fridatalist, 
@@ -31,6 +34,9 @@ namespace StateDashbord.Infrastructure.Repository
            ,IGenericServices<occurrence_of_offence> occurrenceofoffence
            ,IGenericServices<investigating_officer > investigatingofficer
             , IGenericServices<visiting_details_scrb> visitingdetailsscrb
+            , IGenericServices<additional_information> additionalinformation
+           , IGenericServices<additional_accused_list> additionalaccusedlist
+            , IGenericServices<additional_officer_visit> additionalofficervisit
             )
         {
             _friservicedata = friservicedata;
@@ -42,6 +48,9 @@ namespace StateDashbord.Infrastructure.Repository
             _occurrenceofoffence = occurrenceofoffence;
             _investigatingofficer = investigatingofficer;
             _visitingdetailsscrb = visitingdetailsscrb;
+            _additionalinformation = additionalinformation;
+            _additionalaccusedlist = additionalaccusedlist;
+            _additionalofficervisit = additionalofficervisit;
         }
 
         public async Task<Result<fridetails>> getFriDataByid(int id, int userid, int userposition, int rollid)
@@ -65,6 +74,9 @@ namespace StateDashbord.Infrastructure.Repository
                     objfridetails.occurrence_Of_Offence = await _occurrenceofoffence.GetFirstOrDefaultAsync("getoccurrence_of_offencebyfriid", fridata);
                     objfridetails.investigating_Officer = await _investigatingofficer.GetFirstOrDefaultAsync("getInvestigating_Officerbyfriid", fridata);
                     objfridetails.visiting_details_scrb = await _visitingdetailsscrb.GetFirstOrDefaultAsync("getvisiting_details_scrbbyfriid", fridata);
+                    objfridetails.additional_information = await _additionalinformation.GetFirstOrDefaultAsync("getadditional_informationbyfriid", fridata);
+                    objfridetails.additional_accused_list = await _additionalaccusedlist.GetAsync("getadditional_accused_listbyfriid", fridata);
+                    objfridetails.additional_officer_visit = await _additionalofficervisit.GetAsync("getadditional_officer_visitbyfriid", fridata);
 
 
                     return Result<fridetails>.SuccessResult(objfridetails, "fechdata succesfull", 1);
