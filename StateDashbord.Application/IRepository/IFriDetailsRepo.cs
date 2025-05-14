@@ -15,6 +15,7 @@ namespace StateDashbord.Application.IRepository
         Task<Result<List<FridataList>>> getFriDataByType(int id, int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
         Task<Result<List<FridataList>>> getFriDataByTypeformap( int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
         Task<Result<fridetails>> getFriDataByid(int id, int userid, int userposition, int rollid);
+        Task<Result<int>> Postadditionalinformation(Postadditional_information additionalinformationDto);
         //Task<int> saveFriData(int  x);
     }
 }

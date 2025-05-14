@@ -14,6 +14,7 @@ namespace StateDashbord.Application.IService
         Task<Result<List<FridataListDto>>> getFriDataByType(int id, int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
         Task<Result<List<FridataListDto>>> getFriDataByTypeformap(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
         Task<Result<FRIDetailDto>> getFriDataByid(int id, int userid, int userposition, int rollid);
+        Task<Result<int>> Postadditionalinformation(additionalinformationDto additionalinformationDto);
 
     }
 }

@@ -20,8 +20,6 @@ namespace StateDashbord.Application.Service
         {
             _fetchFriDetails = fetchFriDetails;
             _FriDetails = FriDetails;
-
-
         }
 
         public async Task<Result<FRIDetailDto>> getFriDataByid(int id, int userid, int userposition, int rollid)
@@ -188,6 +186,57 @@ namespace StateDashbord.Application.Service
             }).ToList();
 
             return Result<List<FridataListDto>>.SuccessResult(frilistDtoList, "fechdata succesfull", 1);
+        }
+
+        public async Task<Result<int>> Postadditionalinformation(additionalinformationDto additionalinformationDto)
+        {
+            Postadditional_information postadditionalinformation = new Postadditional_information();
+            postadditionalinformation.additional_Information = new additional_information
+            {
+                recid = additionalinformationDto.recid,
+                if_criminal_history = additionalinformationDto.if_criminal_history,
+                if_media_sensational = additionalinformationDto.if_media_sensational,
+                if_complaint_against_PG = additionalinformationDto.if_complaint_against_PG,
+                if_affect_law = additionalinformationDto.if_affect_law,
+                if_arresting_accused_affect_law = additionalinformationDto.if_arresting_accused_affect_law,
+                if_accused_arrested = additionalinformationDto.if_accused_arrested,
+                accused_arrested_reason = additionalinformationDto.accused_arrested_reason,
+                if_media_link = additionalinformationDto.if_media_link,
+                media_link = additionalinformationDto.media_link,
+                if_social_media_link = additionalinformationDto.if_social_media_link,
+                social_media_link = additionalinformationDto.social_media_link,
+                if_e_evidence_used = additionalinformationDto.if_e_evidence_used,
+                friid = additionalinformationDto.friid,
+
+            };
+            postadditionalinformation.additional_Accused_Lists = additionalinformationDto.additional_accused_list?.Select(x => new additional_accused_list
+            {
+                recid = x.recid,
+                additional_accused_name = x.additional_accused_name,
+                additional_accused_address = x.additional_accused_address,
+                additional_accused_mobileNo = x.additional_accused_mobileNo,
+                friid = x.friid
+            }).ToList();
+            postadditionalinformation.additional_Officer_Visits = additionalinformationDto.additional_officer_visit?.Select(x => new additional_officer_visit
+            {
+                recid = x.recid,
+                additional_officer_name = x.additional_officer_name,
+                additional_officer_designation = x.additional_officer_designation,
+                additional_officer_mobileno = x.additional_officer_mobileno,
+                visit_date = x.visit_date,
+                visit_time = x.visit_time,
+                friid = x.friid
+            }).ToList();
+            var mydata = await _FriDetails.Postadditionalinformation(postadditionalinformation);
+
+            if(mydata.sucess)
+            {
+                return Result<int>.SuccessResult(mydata.data, "Data Inserted Successfully", 1);
+            }
+            else
+            {
+                return Result<int>.FailureResult(mydata.message, 0);
+            }
         }
 
         public async Task<Result<string>> sysFriDetails(FriRequest friRequest)

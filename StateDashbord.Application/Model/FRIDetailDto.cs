@@ -91,31 +91,17 @@ namespace StateDashbord.Application.Model
         public string? visiting_time { get; set; }
     }
 
-    public class additional_informationDto
+    public class additional_informationDto : additionalinformationDto
     {
-        public int recid { get; set; }
-        public bool? if_criminal_history { get; set; }
         public string?  if_criminal_history_text { get; set; }
-        public bool? if_media_sensational { get; set; }
         public string? if_media_sensational_text { get; set; }
-        public bool? if_complaint_against_PG { get; set; }
         public string? if_complaint_against_PG_text { get; set; }
-        public bool? if_affect_law { get; set; }
         public string? if_affect_law_text { get; set; }
-        public bool? if_arresting_accused_affect_law { get; set; }
         public string? if_arresting_accused_affect_law_text { get; set; }
-        public bool? if_accused_arrested { get; set; }
         public string ? if_accused_arrested_text { get; set; }
-        public string? accused_arrested_reason { get; set; }
-        public bool? if_media_link { get; set; }
         public string? if_media_link_text { get; set; }
-        public string? media_link { get; set; }
-        public bool? if_social_media_link { get; set; }
         public string? if_social_media_link_text { get; set; }
-        public string? social_media_link { get; set; }
-        public bool? if_e_evidence_used { get; set; }
         public string? if_e_evidence_used_text { get; set; }
-        public int? friid { get; set; }
         
     }
 

@@ -142,6 +142,58 @@ namespace StateDashbord.Infrastructure.Repository
             }
         }
 
+        public async Task<Result<int>> Postadditionalinformation(Postadditional_information additionalinformationDto)
+        {
+
+            Dictionary<string, object> additional_information = new Dictionary<string, object>();
+            additional_information.Add("if_criminal_history", additionalinformationDto.additional_Information.if_criminal_history);
+            additional_information.Add("if_media_sensational", additionalinformationDto.additional_Information.if_media_sensational);
+            additional_information.Add("if_complaint_against_PG", additionalinformationDto.additional_Information.if_complaint_against_PG);
+            additional_information.Add("if_affect_law", additionalinformationDto.additional_Information.if_affect_law);
+            additional_information.Add("if_arresting_accused_affect_law", additionalinformationDto.additional_Information.if_arresting_accused_affect_law);
+            additional_information.Add("if_accused_arrested", additionalinformationDto.additional_Information.if_accused_arrested);
+            additional_information.Add("accused_arrested_reason", additionalinformationDto.additional_Information.accused_arrested_reason);
+            additional_information.Add("if_media_link", additionalinformationDto.additional_Information.if_media_link);
+            additional_information.Add("media_link", additionalinformationDto.additional_Information.media_link);
+            additional_information.Add("if_social_media_link", additionalinformationDto.additional_Information.if_social_media_link);
+            additional_information.Add("social_media_link", additionalinformationDto.additional_Information.social_media_link);
+            additional_information.Add("if_e_evidence_used", additionalinformationDto.additional_Information.if_e_evidence_used);
+            additional_information.Add("friid", additionalinformationDto.additional_Information.friid);
+            additional_information.Add("Id", additionalinformationDto.additional_Information.recid);
+
+            var friid = await _additionalinformation.Add(additional_information, "Insertadditional_information");
+            if (friid > 0)
+            {
+                foreach (var additional_Accused in additionalinformationDto.additional_Accused_Lists)
+                {
+                    Dictionary<string, object> additional_accused_list = new Dictionary<string, object>();
+                    additional_accused_list.Add("additional_accused_name", additional_Accused.additional_accused_name);
+                    additional_accused_list.Add("additional_accused_address", additional_Accused.additional_accused_address);
+                    additional_accused_list.Add("additional_accused_mobileNo", additional_Accused.additional_accused_mobileNo);
+                    additional_accused_list.Add("friid", additional_Accused.friid);
+                    await _additionalaccusedlist.Add(additional_accused_list, "Insertadditionalaccused");
+                }
+                foreach (var additional_Accused in additionalinformationDto.additional_Officer_Visits)
+                {
+                    Dictionary<string, object> additional_Officer_Visits = new Dictionary<string, object>();
+                    additional_Officer_Visits.Add("additional_officer_name", additional_Accused.additional_officer_name);
+                    additional_Officer_Visits.Add("additional_officer_designation", additional_Accused.additional_officer_designation);
+                    additional_Officer_Visits.Add("additional_officer_mobileno", additional_Accused.additional_officer_mobileno);
+                    additional_Officer_Visits.Add("visit_date", additional_Accused.visit_date);
+                    additional_Officer_Visits.Add("visit_time", additional_Accused.visit_time);
+                    additional_Officer_Visits.Add("friid", additional_Accused.friid);
+                    await _additionalofficervisit.Add(additional_Officer_Visits, "Insertadditionalofficervisit");
+                }
+            }
+            else
+            {
+                return Result<int>.FailureResult($"An error occurred: Data Not Save", 0); 
+            }
+
+
+            return Result<int>.SuccessResult(friid, $"Data Save Successfully", 1);
+        }
+
         public async Task saveFriData(FRIDetailDto fRIDetailDto)
         {
             Dictionary<string, object> PS_Details = new Dictionary<string, object>();

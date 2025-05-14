@@ -52,5 +52,13 @@ namespace StateDashbord.API.Controllers
             var fridata = await _friDetailsService.getFriDataByid(id, userid, userposition, rollid);
             return Ok(fridata);
         }
+
+        [HttpPost("Postadditionalinformation")]
+        public async Task<ActionResult<Result<int>>> Postadditionalinformation([FromBody] additionalinformationDto additionalinformationDto)
+        {
+            var result = await _friDetailsService.Postadditionalinformation(additionalinformationDto);
+            return Ok(result);
+
+        }
     }
 }

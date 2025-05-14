@@ -150,7 +150,7 @@ namespace StateDashbord.Infrastructure.Persistence
                     return recid;
                 }
             }
-            catch (Exception ex)
+                catch (Exception ex)
             {
                 _logger.LogError($"ExecuteWithoutResultAsync {ex.Message} ");
 

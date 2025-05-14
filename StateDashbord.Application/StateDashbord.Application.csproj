@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Model\usermasterDto.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\StateDashbord.Domain\StateDashbord.Domain.csproj" />
   </ItemGroup>
 

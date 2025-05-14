@@ -24,8 +24,18 @@ namespace StateDashbord.Infrastructure.Infrastructure
            services.AddTransient<IUserService, UserService>();
            services.AddTransient<IDashboardRepo, DashboardRepo>();
            services.AddTransient<IDashboardService, DashboardService>();
-           services.AddSingleton<DapperContext>();
-           services.AddHttpClient<IFetchFriDetails, FetchFriDetails>();
+            services.AddTransient<IFestivalMasterRepo, FestivalMasterRepo>();
+            services.AddTransient<IFestivalMasterService, FestivalMasterService>();
+            services.AddTransient<ICeremonyMasterRepo, CeremonyMasterRepo>();
+            services.AddTransient<ICeremonyMasterService, CeremonyMasterService>();
+            services.AddTransient<IApplicationMasterRepo, ApplicationMasterRepo>();
+            services.AddTransient<IApplicationMasterService, ApplicationMasterService>();
+            services.AddTransient<IDistrictMasterRepo, DistrictMasterRepo>();
+            services.AddTransient<IDistrictMasterService, DistrictMasterService>();
+            services.AddTransient<IPolicestationMasterRepo, PolicestationMasterRepo>();
+            services.AddTransient<IPolicestationMasterService, PolicestationMasterService>();
+            services.AddSingleton<DapperContext>();
+            services.AddHttpClient<IFetchFriDetails, FetchFriDetails>();
            services.AddScoped(typeof(IGenericServices<>), typeof(GenericServices<>));
 
             return services;
