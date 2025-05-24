@@ -11,5 +11,8 @@ namespace StateDashbord.Application.IRepository
     public interface IFestivalMasterRepo
     {
         Task<Result<int>> PostFestivalMaster(festival_master festivalMaster);
+
+        Task<Result<List<festival_masterView>>> getFestivalMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
+
     }
 }

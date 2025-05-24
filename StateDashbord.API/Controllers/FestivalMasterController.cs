@@ -26,5 +26,12 @@ namespace StateDashbord.API.Controllers
             return Ok(result);
 
         }
+
+        [HttpGet("GetFestivalMasterList")]
+        public async Task<ActionResult<Result<List<festival_masterViewDto>>>> GetFestivalMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            var result = await _festivalMasterService.getFestivalMasterList(userid, userposition, rollid, from_date, to_date);
+            return Ok(result);
+        }
     }
 }

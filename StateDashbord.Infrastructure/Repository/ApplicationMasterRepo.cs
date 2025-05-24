@@ -14,14 +14,38 @@ namespace StateDashbord.Infrastructure.Repository
     public class ApplicationMasterRepo : IApplicationMasterRepo
     {
         private readonly IGenericServices<application_master> _applicationmaster;
+        private readonly IGenericServices<application_masterView> _applicationmasterview;
 
         private readonly ILogger<UserMasterRepo> _logger;
 
         public ApplicationMasterRepo(IGenericServices<application_master> applicationmaster
+            , IGenericServices<application_masterView> applicationmasterview
             , ILogger<UserMasterRepo> logger)
         {
             _applicationmaster = applicationmaster;
+            _applicationmasterview = applicationmasterview;
             _logger = logger;
+        }
+
+        public async Task<Result<List<application_masterView>>> getApplicationMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            try
+            {
+                Dictionary<string, object> applicationMasterdis = new Dictionary<string, object>();
+
+                applicationMasterdis.Add("userid", userid);
+                applicationMasterdis.Add("userposition", userposition);
+                applicationMasterdis.Add("rollid", rollid);
+                applicationMasterdis.Add("from_date", from_date?.ToString("yyyy-MM-dd"));
+                applicationMasterdis.Add("to_date", to_date?.ToString("yyyy-MM-dd"));
+                var resultlist = await _applicationmasterview.GetAsync("getapplicationmasterlist", applicationMasterdis);
+                return Result<List<application_masterView>>.SuccessResult(resultlist, "fechdata succesfull", 1);
+            }
+            catch (Exception ex)
+            {
+
+                return Result<List<application_masterView>>.FailureResult($"An error occurred: {ex.Message}", 0);
+            }
         }
 
         public async Task<Result<int>> PostApplicationMaster(application_master applicationMaster)

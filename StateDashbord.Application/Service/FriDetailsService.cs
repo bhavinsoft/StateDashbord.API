@@ -209,24 +209,32 @@ namespace StateDashbord.Application.Service
                 friid = additionalinformationDto.friid,
 
             };
-            postadditionalinformation.additional_Accused_Lists = additionalinformationDto.additional_accused_list?.Select(x => new additional_accused_list
+            if (additionalinformationDto.additional_accused_list != null)
             {
-                recid = x.recid,
-                additional_accused_name = x.additional_accused_name,
-                additional_accused_address = x.additional_accused_address,
-                additional_accused_mobileNo = x.additional_accused_mobileNo,
-                friid = x.friid
-            }).ToList();
-            postadditionalinformation.additional_Officer_Visits = additionalinformationDto.additional_officer_visit?.Select(x => new additional_officer_visit
+                postadditionalinformation.additional_Accused_Lists = additionalinformationDto.additional_accused_list?.Select(x => new additional_accused_list
+                {
+                    recid = x.recid,
+                    additional_accused_name = x.additional_accused_name,
+                    additional_accused_address = x.additional_accused_address,
+                    additional_accused_mobileNo = x.additional_accused_mobileNo,
+                    reason = x.reason,
+                    remarks = x.remarks,
+                    friid = x.friid
+                }).ToList();
+            }
+            if (additionalinformationDto.additional_officer_visit != null)
             {
-                recid = x.recid,
-                additional_officer_name = x.additional_officer_name,
-                additional_officer_designation = x.additional_officer_designation,
-                additional_officer_mobileno = x.additional_officer_mobileno,
-                visit_date = x.visit_date,
-                visit_time = x.visit_time,
-                friid = x.friid
-            }).ToList();
+                postadditionalinformation.additional_Officer_Visits = additionalinformationDto.additional_officer_visit?.Select(x => new additional_officer_visit
+                {
+                    recid = x.recid,
+                    additional_officer_name = x.additional_officer_name,
+                    additional_officer_designation = x.additional_officer_designation,
+                    additional_officer_mobileno = x.additional_officer_mobileno,
+                    visit_date = x.visit_date,
+                    visit_time = x.visit_time,
+                    friid = x.friid
+                }).ToList();
+            }
             var mydata = await _FriDetails.Postadditionalinformation(postadditionalinformation);
 
             if(mydata.sucess)

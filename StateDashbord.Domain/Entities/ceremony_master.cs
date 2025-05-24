@@ -19,5 +19,12 @@ namespace StateDashbord.Domain.Entities
         public string? remarks { get; set; }
         public DateTime? createdate { get; set; }
         
+
+    }
+
+    public class ceremony_masterView : ceremony_master
+    {
+        public string? district_name { get; set; }
+        public string? policestation_name { get; set; }
     }
 }

@@ -22,6 +22,27 @@ namespace StateDashbord.Application.Service
             _festivalMasterRepo = festivalMasterRepo;
         }
 
+        public async Task<Result<List<festival_masterViewDto>>> getFestivalMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            var result = await _festivalMasterRepo.getFestivalMasterList(userid, userposition, rollid, from_date, to_date);
+
+            var festivalDtoList = result.data.Select(x => new festival_masterViewDto
+            {
+                recid = x.recid,
+                district_id = x.district_id,
+                district_name = x.district_name,
+                policestation_id = x.policestation_id,
+                policestation_name = x.policestation_name,
+                festival_details = x.festival_details,
+                festival_date = x.festival_date,
+                createdate = x.createdate,
+                remarks = x.remarks,
+            }).ToList();
+            
+
+            return Result<List<festival_masterViewDto>>.SuccessResult(festivalDtoList, "fechdata succesfull", 1);
+        }
+
         public async Task<Result<int>> PostFestivalMaster(festival_masterDto festivalMaster)
         {
             festival_master festival_Master = new festival_master();

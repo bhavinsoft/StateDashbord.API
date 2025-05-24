@@ -12,6 +12,8 @@ namespace StateDashbord.Domain.Entities
         public string? additional_accused_name { get; set; }
         public string? additional_accused_address { get; set; }
         public string? additional_accused_mobileNo { get; set; }
+        public string? reason { get; set; }
+        public string? remarks { get; set; }
         public int? friid { get; set; }
        
     }

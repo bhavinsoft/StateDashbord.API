@@ -26,5 +26,11 @@ namespace StateDashbord.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetApplicationMasterList")]
+        public async Task<ActionResult<Result<List<application_masterViewDto>>>> GetApplicationMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            var result = await _applicationMasterService.getApplicationMasterList(userid, userposition, rollid, from_date, to_date);
+            return Ok(result);
+        }
     }
 }

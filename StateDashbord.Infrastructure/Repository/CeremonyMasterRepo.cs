@@ -15,14 +15,38 @@ namespace StateDashbord.Infrastructure.Repository
     public class CeremonyMasterRepo : ICeremonyMasterRepo
     {
         private readonly IGenericServices<ceremony_master> _ceremonymaster;
+        private readonly IGenericServices<ceremony_masterView> _ceremonymasterview;
 
         private readonly ILogger<UserMasterRepo> _logger;
 
         public CeremonyMasterRepo(IGenericServices<ceremony_master> ceremonymaster
-            ,ILogger<UserMasterRepo> logger)
+           , IGenericServices<ceremony_masterView> ceremonymasterview
+            , ILogger<UserMasterRepo> logger)
         {
             _ceremonymaster = ceremonymaster;
+            _ceremonymasterview = ceremonymasterview;
             _logger = logger;
+        }
+
+        public async Task<Result<List<ceremony_masterView>>> getCeremonyMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            try
+            {
+                Dictionary<string, object> ceremonyMasterdis = new Dictionary<string, object>();
+
+                ceremonyMasterdis.Add("userid", userid);
+                ceremonyMasterdis.Add("userposition", userposition);
+                ceremonyMasterdis.Add("rollid", rollid);
+                ceremonyMasterdis.Add("from_date", from_date?.ToString("yyyy-MM-dd"));
+                ceremonyMasterdis.Add("to_date", to_date?.ToString("yyyy-MM-dd"));
+                var resultlist = await _ceremonymasterview.GetAsync("getceremonymasterlist", ceremonyMasterdis);
+                return Result<List<ceremony_masterView>>.SuccessResult(resultlist, "fechdata succesfull", 1);
+            }
+            catch (Exception ex)
+            {
+
+                return Result<List<ceremony_masterView>>.FailureResult($"An error occurred: {ex.Message}", 0);
+            }
         }
 
         public async Task<Result<int>> PostCeremonyMaster(ceremony_master ceremonyMaster)

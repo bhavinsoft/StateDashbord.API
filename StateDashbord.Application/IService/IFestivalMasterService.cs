@@ -11,6 +11,8 @@ namespace StateDashbord.Application.IService
     public interface IFestivalMasterService
     {
         Task<Result<int>> PostFestivalMaster(festival_masterDto festivalMaster);
+        Task<Result<List<festival_masterViewDto>>> getFestivalMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
+
     }
-   
+
 }

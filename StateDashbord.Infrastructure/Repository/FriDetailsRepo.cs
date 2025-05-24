@@ -164,25 +164,33 @@ namespace StateDashbord.Infrastructure.Repository
             var friid = await _additionalinformation.Add(additional_information, "Insertadditional_information");
             if (friid > 0)
             {
-                foreach (var additional_Accused in additionalinformationDto.additional_Accused_Lists)
+                if (additionalinformationDto.additional_Accused_Lists != null)
                 {
-                    Dictionary<string, object> additional_accused_list = new Dictionary<string, object>();
-                    additional_accused_list.Add("additional_accused_name", additional_Accused.additional_accused_name);
-                    additional_accused_list.Add("additional_accused_address", additional_Accused.additional_accused_address);
-                    additional_accused_list.Add("additional_accused_mobileNo", additional_Accused.additional_accused_mobileNo);
-                    additional_accused_list.Add("friid", additional_Accused.friid);
-                    await _additionalaccusedlist.Add(additional_accused_list, "Insertadditionalaccused");
+                    foreach (var additional_Accused in additionalinformationDto.additional_Accused_Lists)
+                    {
+                        Dictionary<string, object> additional_accused_list = new Dictionary<string, object>();
+                        additional_accused_list.Add("additional_accused_name", additional_Accused.additional_accused_name);
+                        additional_accused_list.Add("additional_accused_address", additional_Accused.additional_accused_address);
+                        additional_accused_list.Add("additional_accused_mobileNo", additional_Accused.additional_accused_mobileNo);
+                        additional_accused_list.Add("reason", additional_Accused.reason);
+                        additional_accused_list.Add("remarks", additional_Accused.remarks);
+                        additional_accused_list.Add("friid", additional_Accused.friid);
+                        await _additionalaccusedlist.Add(additional_accused_list, "Insertadditionalaccused");
+                    }
                 }
-                foreach (var additional_Accused in additionalinformationDto.additional_Officer_Visits)
+                if (additionalinformationDto.additional_Officer_Visits != null)
                 {
-                    Dictionary<string, object> additional_Officer_Visits = new Dictionary<string, object>();
-                    additional_Officer_Visits.Add("additional_officer_name", additional_Accused.additional_officer_name);
-                    additional_Officer_Visits.Add("additional_officer_designation", additional_Accused.additional_officer_designation);
-                    additional_Officer_Visits.Add("additional_officer_mobileno", additional_Accused.additional_officer_mobileno);
-                    additional_Officer_Visits.Add("visit_date", additional_Accused.visit_date);
-                    additional_Officer_Visits.Add("visit_time", additional_Accused.visit_time);
-                    additional_Officer_Visits.Add("friid", additional_Accused.friid);
-                    await _additionalofficervisit.Add(additional_Officer_Visits, "Insertadditionalofficervisit");
+                    foreach (var additional_Accused in additionalinformationDto.additional_Officer_Visits)
+                    {
+                        Dictionary<string, object> additional_Officer_Visits = new Dictionary<string, object>();
+                        additional_Officer_Visits.Add("additional_officer_name", additional_Accused.additional_officer_name);
+                        additional_Officer_Visits.Add("additional_officer_designation", additional_Accused.additional_officer_designation);
+                        additional_Officer_Visits.Add("additional_officer_mobileno", additional_Accused.additional_officer_mobileno);
+                        additional_Officer_Visits.Add("visit_date", additional_Accused.visit_date);
+                        additional_Officer_Visits.Add("visit_time", additional_Accused.visit_time);
+                        additional_Officer_Visits.Add("friid", additional_Accused.friid);
+                        await _additionalofficervisit.Add(additional_Officer_Visits, "Insertadditionalofficervisit");
+                    }
                 }
             }
             else

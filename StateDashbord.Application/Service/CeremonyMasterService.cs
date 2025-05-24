@@ -21,6 +21,28 @@ namespace StateDashbord.Application.Service
             _ceremonyMasterRepo = ceremonyMasterRepo;
         }
 
+        public async Task<Result<List<ceremony_masterViewDto>>> getCeremonyMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            var result = await _ceremonyMasterRepo.getCeremonyMasterList(userid, userposition, rollid, from_date, to_date);
+
+            var ceremonyDtoList = result.data.Select(x => new ceremony_masterViewDto
+            {
+                recid = x.recid,
+                district_id = x.district_id,
+                district_name = x.district_name,
+                policestation_id = x.policestation_id,
+                policestation_name = x.policestation_name,
+                ceremony_details = x.ceremony_details,
+                ceremony_venue = x.ceremony_venue,
+                ceremony_date = x.ceremony_date,
+                createdate = x.createdate,
+                remarks = x.remarks,
+
+            }).ToList();
+
+            return Result<List<ceremony_masterViewDto>>.SuccessResult(ceremonyDtoList, "fechdata succesfull", 1);
+        }
+
         public async Task<Result<int>> PostCeremonyMaster(ceremony_masterDto ceremonyMaster)
         {
             ceremony_master ceremony_Master = new ceremony_master();

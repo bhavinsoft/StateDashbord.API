@@ -11,6 +11,7 @@ namespace StateDashbord.Application.IRepository
     public interface ICeremonyMasterRepo
     {
         Task<Result<int>> PostCeremonyMaster(ceremony_master ceremonyMaster);
+        Task<Result<List<ceremony_masterView>>> getCeremonyMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
 
     }
 }

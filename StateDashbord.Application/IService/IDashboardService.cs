@@ -11,6 +11,10 @@ namespace StateDashbord.Application.IService
     {
         Task<Result<List<DashbordCount>>> getDashboardcountServicedata(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
         Task<Result<List<DashbordCount>>> getDashboardcountServicedataotherinfo(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
+
+        Task<Result<List<DashbordCount>>> getDashboardcountdataacf(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
+        Task<Result<List<DashbordCount>>> getDashboardcountdataprogram(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
+
     }
-   
+
 }

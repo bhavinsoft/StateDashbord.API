@@ -22,4 +22,10 @@ namespace StateDashbord.Application.Model
         public string? remarks { get; set; }
         public DateTime? createdate { get; set; }
     }
+
+    public class application_masterViewDto :application_masterDto
+    {
+        public string? district_name { get; set; }
+        public string? policestation_name { get; set; }
+    }
 }

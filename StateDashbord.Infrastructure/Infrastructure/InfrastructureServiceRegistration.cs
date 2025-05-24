@@ -34,6 +34,8 @@ namespace StateDashbord.Infrastructure.Infrastructure
             services.AddTransient<IDistrictMasterService, DistrictMasterService>();
             services.AddTransient<IPolicestationMasterRepo, PolicestationMasterRepo>();
             services.AddTransient<IPolicestationMasterService, PolicestationMasterService>();
+            services.AddTransient<IProgramMasterRepo, ProgramMasterRepo>();
+            services.AddTransient<IProgramMasterService, ProgramMasterService>();
             services.AddSingleton<DapperContext>();
             services.AddHttpClient<IFetchFriDetails, FetchFriDetails>();
            services.AddScoped(typeof(IGenericServices<>), typeof(GenericServices<>));

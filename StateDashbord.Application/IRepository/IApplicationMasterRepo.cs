@@ -11,5 +11,8 @@ namespace StateDashbord.Application.IRepository
     public interface IApplicationMasterRepo
     {
         Task<Result<int>> PostApplicationMaster(application_master applicationMaster);
+
+        Task<Result<List<application_masterView>>> getApplicationMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date);
+
     }
 }

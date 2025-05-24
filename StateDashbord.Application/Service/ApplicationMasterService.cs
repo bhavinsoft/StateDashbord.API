@@ -23,6 +23,33 @@ namespace StateDashbord.Application.Service
 
         }
 
+        public async Task<Result<List<application_masterViewDto>>> getApplicationMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            var result = await _applicationMasterRepo.getApplicationMasterList(userid, userposition, rollid, from_date, to_date);
+
+            var applicationDtoList = result.data.Select(x => new application_masterViewDto
+            {
+                recid = x.recid,
+                district_id = x.district_id,
+                district_name = x.district_name,
+                policestation_id = x.policestation_id,
+                policestation_name = x.policestation_name,
+                application_Details = x.application_Details,
+                applicant_name = x.applicant_name,
+                applicant_address = x.applicant_address,
+                applicant_mobile = x.applicant_mobile,
+                applicant_organization = x.applicant_organization,
+                application_submitted_office = x.application_submitted_office,
+                applicants_number = x.applicants_number,
+                application_due_date = x.application_due_date,
+                createdate = x.createdate,
+                remarks = x.remarks,
+
+            }).ToList();
+
+            return Result<List<application_masterViewDto>>.SuccessResult(applicationDtoList, "fechdata succesfull", 1);
+        }
+
         public async Task<Result<int>> PostApplicationMaster(application_masterDto applicationMaster)
         {
             application_master application_Master = new application_master();

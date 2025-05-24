@@ -44,5 +44,30 @@ namespace StateDashbord.API.Controllers
             return Ok(dashbordcountdataother);
         }
 
+        [HttpGet("GetDashboardCountacf")]
+        public async Task<ActionResult<Result<List<DashbordCount>>>> GetDashboardCountacf(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+
+            var dashbordcountdataacf = await _dashboardService.getDashboardcountdataacf(userid, userposition, rollid, from_date, to_date);
+
+            if (dashbordcountdataacf?.data == null)
+            {
+                return NotFound(dashbordcountdataacf);
+            }
+            return Ok(dashbordcountdataacf);
+        }
+
+        [HttpGet("GetDashboardCountprogram")]
+        public async Task<ActionResult<Result<List<DashbordCount>>>> GetDashboardCountprogram(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+
+            var dashbordcountdataprogram = await _dashboardService.getDashboardcountdataprogram(userid, userposition, rollid, from_date, to_date);
+
+            if (dashbordcountdataprogram?.data == null)
+            {
+                return NotFound(dashbordcountdataprogram);
+            }
+            return Ok(dashbordcountdataprogram);
+        }
     }
 }

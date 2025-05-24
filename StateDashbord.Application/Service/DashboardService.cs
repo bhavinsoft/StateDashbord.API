@@ -20,6 +20,22 @@ namespace StateDashbord.Application.Service
             _dashboardRepo = dashboardRepo;
         }
 
+        public async Task<Result<List<DashbordCount>>> getDashboardcountdataacf(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            var dashboardcountother = await _dashboardRepo.getDashboardcountdataacf(userid, userposition, rollid, from_date, to_date);
+
+
+            return Result<List<DashbordCount>>.SuccessResult(dashboardcountother.data, "fechdata succesfull", 1);
+        }
+
+        public async Task<Result<List<DashbordCount>>> getDashboardcountdataprogram(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            var dashboardcountother = await _dashboardRepo.getDashboardcountdataprogram(userid, userposition, rollid, from_date, to_date);
+
+
+            return Result<List<DashbordCount>>.SuccessResult(dashboardcountother.data, "fechdata succesfull", 1);
+        }
+
         public async Task<Result<List<DashbordCount>>> getDashboardcountServicedata(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
         {
           

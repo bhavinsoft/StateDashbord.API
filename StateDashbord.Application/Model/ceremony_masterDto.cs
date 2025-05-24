@@ -18,4 +18,10 @@ namespace StateDashbord.Application.Model
         public DateTime? createdate { get; set; }
 
     }
+    public class ceremony_masterViewDto :ceremony_masterDto
+    {
+
+        public string? district_name { get; set; }
+        public string? policestation_name { get; set; }
+    }
 }

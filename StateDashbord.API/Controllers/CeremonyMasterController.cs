@@ -25,6 +25,12 @@ namespace StateDashbord.API.Controllers
             var result = await _ceremonyMasterService.PostCeremonyMaster(ceremonyMasterDto);
             return Ok(result);
         }
+        [HttpGet("GetCeremonyMasterList")]
+        public async Task<ActionResult<Result<List<ceremony_masterViewDto>>>> GetCeremonyMasterList(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            var result = await _ceremonyMasterService.getCeremonyMasterList(userid, userposition, rollid, from_date, to_date);
+            return Ok(result);
+        }
 
 
 

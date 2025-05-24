@@ -20,4 +20,12 @@ namespace StateDashbord.Domain.Entities
 
     
     }
+
+    public class festival_masterView : festival_master
+    {
+        public string? district_name { get; set; }
+        public string? policestation_name { get; set; }
+      
+    }
+    
 }
