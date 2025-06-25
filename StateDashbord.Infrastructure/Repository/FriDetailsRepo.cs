@@ -24,7 +24,7 @@ namespace StateDashbord.Infrastructure.Repository
         private readonly IGenericServices<additional_information> _additionalinformation;
         private readonly IGenericServices<additional_accused_list> _additionalaccusedlist;
         private readonly IGenericServices<additional_officer_visit> _additionalofficervisit;
-
+       
         public FriDetailsRepo(IGenericServices<FRIDetailDto> friservicedata, 
             IGenericServices<FridataList> fridatalist, 
             IGenericServices<fridetailsmaster> fridetailsmaster,
@@ -37,6 +37,7 @@ namespace StateDashbord.Infrastructure.Repository
             , IGenericServices<additional_information> additionalinformation
            , IGenericServices<additional_accused_list> additionalaccusedlist
             , IGenericServices<additional_officer_visit> additionalofficervisit
+           
             )
         {
             _friservicedata = friservicedata;
@@ -51,6 +52,38 @@ namespace StateDashbord.Infrastructure.Repository
             _additionalinformation = additionalinformation;
             _additionalaccusedlist = additionalaccusedlist;
             _additionalofficervisit = additionalofficervisit;
+           
+        }
+
+        public async Task<Result<additionalinformation>> getAdditionalInformationByid(int id, int userid, int userposition, int rollid)
+        {
+            try
+            {
+                additionalinformation additionalinformation = new additionalinformation();
+                Dictionary<string, object> fridata = new Dictionary<string, object>();
+                fridata.Add("id", id);
+
+                additionalinformation.additional_information = await _additionalinformation.GetFirstOrDefaultAsync("getadditional_informationbyid", fridata);
+
+                if (additionalinformation.additional_information != null)
+                {
+
+                    additionalinformation.additional_accused_list = await _additionalaccusedlist.GetAsync("getadditional_accused_listbyfriid", fridata);
+                    additionalinformation.additional_officer_visit = await _additionalofficervisit.GetAsync("getadditional_officer_visitbyfriid", fridata);
+                    return Result<additionalinformation>.SuccessResult(additionalinformation, "fechdata succesfull", 1);
+
+                }
+                else
+                {
+
+                    return Result<additionalinformation>.FailureResult($"data not found", 0);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Result<additionalinformation>.FailureResult($"An error occurred: {ex.Message}", 0);
+            }
         }
 
         public async Task<Result<fridetails>> getFriDataByid(int id, int userid, int userposition, int rollid)
@@ -99,7 +132,7 @@ namespace StateDashbord.Infrastructure.Repository
 
         }
 
-        public async Task<Result<List<FridataList>>> getFriDataByType(int id, int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        public async Task<Result<List<FridataList>>> getFriDataByType(int id, int userid, int userposition, int rollid,int addinfo, DateOnly? from_date, DateOnly? to_date)
         {
             try
             {
@@ -110,6 +143,7 @@ namespace StateDashbord.Infrastructure.Repository
                 fridatdis.Add("rollid", rollid);
                 fridatdis.Add("from_date", from_date?.ToString("yyyy-MM-dd"));
                 fridatdis.Add("to_date", to_date?.ToString("yyyy-MM-dd"));
+                fridatdis.Add("addinfo", addinfo);
                 var fridat =await _fridatalist.GetAsync("getFridatabytype", fridatdis);
                 return Result<List<FridataList>>.SuccessResult(fridat, "fechdata succesfull", 1);
             }
@@ -126,7 +160,7 @@ namespace StateDashbord.Infrastructure.Repository
             try
             {
                 Dictionary<string, object> fridatdis = new Dictionary<string, object>();
-               ;
+               
                 fridatdis.Add("userid", userid);
                 fridatdis.Add("userposition", userposition);
                 fridatdis.Add("rollid", rollid);

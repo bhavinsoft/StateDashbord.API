@@ -15,7 +15,6 @@ namespace StateDashbord.Domain.Entities
         public int? policestationid { get; set; }
         public int? categoryid { get; set; }
         public string? programdetails { get; set; }
-
         public string? organizers_name { get; set; }
         public string? organizers_designation { get; set; }
         public string? organizers_organizationname { get; set; }
@@ -26,7 +25,6 @@ namespace StateDashbord.Domain.Entities
         public string? approver_name { get; set; }
         public string? approver_designation { get; set; }
         public string? approver_datetime { get; set; }
-
         public string? program_subject { get; set; }
         public string? program_place { get; set; }
         public string? program_routeinfo { get; set; }
@@ -35,10 +33,7 @@ namespace StateDashbord.Domain.Entities
 
         public int? program_number { get; set; }
         public bool? if_arrestperson { get; set; }
-        public string? arrestperson_name { get; set; }
-        public string? arrestperson_designation { get; set; }
-        public string? arrestperson_organizationname { get; set; }
-        public string? arrestperson_mobile { get; set; }
+       
 
         public DateTime? program_date { get; set; }
         public string? remarks { get; set; }
@@ -48,12 +43,23 @@ namespace StateDashbord.Domain.Entities
 
     }
 
+    public class Postprogram_master
+    {
+        public program_master program_Master { get; set; }
+        public List<dtl_program_arrestperson>? dtl_Program_Arrestpeople { get; set; }
+
+    }
+
+
+
     public class program_masterView : program_master
     {
+        public List<dtl_program_arrestperson>? dtl_Program_Arrestpeople { get; set; }
         public string? district_name { get; set; }
         public string? policestation_name { get; set; }
         public string? categoryname { get; set; }
 
+        public int? afterproid { get; set; }
     }
     
 }

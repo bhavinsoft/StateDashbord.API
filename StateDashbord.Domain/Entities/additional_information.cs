@@ -26,6 +26,12 @@ namespace StateDashbord.Domain.Entities
 
     }
 
+    public class additionalinformation
+    {
+        public additional_information additional_information { get; set; }
+        public List<additional_accused_list>? additional_accused_list { get; set; }
+        public List<additional_officer_visit>? additional_officer_visit { get; set; }
+    }
     public class Postadditional_information
     {
         public additional_information additional_Information { get; set; }

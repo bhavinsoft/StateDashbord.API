@@ -33,20 +33,29 @@ namespace StateDashbord.Application.Model
 
         public int? program_number { get; set; }
         public bool? if_arrestperson { get; set; }
+      
+
+        public DateTime? program_date { get; set; }
+        public string? remarks { get; set; }
+        public DateTime? createdate { get; set; }
+        public List<dtl_program_arrestpersonDto>? dtl_Program_ArrestpersonDto { get; set; }
+
+    }
+
+
+    public class dtl_program_arrestpersonDto
+    {
+       
         public string? arrestperson_name { get; set; }
         public string? arrestperson_designation { get; set; }
         public string? arrestperson_organizationname { get; set; }
         public string? arrestperson_mobile { get; set; }
 
-        public DateTime? program_date { get; set; }
-        public string? remarks { get; set; }
-        public DateTime? createdate { get; set; }
-
     }
-
     public class program_masterViewDto : program_masterDto
     {
 
+        public int? afterproid { get; set; }
         public string? district_name { get; set; }
         public string? policestation_name { get; set; }
         public string? categoryname { get; set; }

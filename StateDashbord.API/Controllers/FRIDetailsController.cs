@@ -33,9 +33,9 @@ namespace StateDashbord.API.Controllers
 
 
         [HttpGet("GetFRIdataList")]
-        public async Task<ActionResult<Result<List<FridataListDto>>>> GetFRIdataListByType(int id, int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        public async Task<ActionResult<Result<List<FridataListDto>>>> GetFRIdataListByType(int id, int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date, int addinfo = 0)
         {
-            var fridata = await _friDetailsService.getFriDataByType(id, userid, userposition, rollid, from_date, to_date);
+            var fridata = await _friDetailsService.getFriDataByType(id, userid, userposition, rollid, addinfo, from_date, to_date);
             return Ok(fridata); 
         }
 
@@ -50,6 +50,13 @@ namespace StateDashbord.API.Controllers
         public async Task<ActionResult<Result<FRIDetailDto>>> GetFRIdatabyid(int id, int userid, int userposition, int rollid)
         {
             var fridata = await _friDetailsService.getFriDataByid(id, userid, userposition, rollid);
+            return Ok(fridata);
+        }
+
+        [HttpGet("GetAdditionalInformationByid")]
+        public async Task<ActionResult<Result<additionalinformationDataDto>>> GetAdditionalInformationByid(int id, int userid, int userposition, int rollid)
+        {   
+            var fridata = await _friDetailsService.getAdditionalInformationByid(id, userid, userposition, rollid);
             return Ok(fridata);
         }
 

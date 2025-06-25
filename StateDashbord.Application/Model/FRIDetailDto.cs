@@ -20,9 +20,14 @@ namespace StateDashbord.Application.Model
         public List<additional_accused_listDto>? additional_accused_list { get; set; }
         public List<additional_officer_visitDto>? additional_officer_visit { get; set; }
     }
+    public class additionalinformationDataDto
+    {
+        public additional_informationDto additional_information { get; set; }
+        public List<additional_accused_listDto>? additional_accused_list { get; set; }
+        public List<additional_officer_visitDto>? additional_officer_visit { get; set; }
+    }
 
-
-    public class FRIDetailmasterDto
+        public class FRIDetailmasterDto
     {
         public string? recid { get; set; }
         public string? ps_cd { get; set; }

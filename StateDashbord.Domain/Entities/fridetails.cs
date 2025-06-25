@@ -20,4 +20,7 @@ namespace StateDashbord.Domain.Entities
         public List<additional_officer_visit>? additional_officer_visit { get; set; }
 
     }
+
+  
+
 }

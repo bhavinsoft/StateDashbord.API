@@ -22,32 +22,91 @@ namespace StateDashbord.Application.Service
             _FriDetails = FriDetails;
         }
 
+        public async Task<Result<additional_informationDto>> getAdditionalInformationByid(int id, int userid, int userposition, int rollid)
+        {
+            var fridata = await _FriDetails.getAdditionalInformationByid(id, userid, userposition, rollid);
+            
+            if(fridata.sucess_code != 0)
+                    {
+                var additional_information = new additional_informationDto
+                {
+                    if_criminal_history = fridata.data.additional_information?.if_criminal_history,
+                    if_criminal_history_text = fridata.data.additional_information?.if_criminal_history == true ? "હા" : fridata.data.additional_information?.if_criminal_history == false ? "ના" : "-",
+                    if_media_sensational = fridata.data.additional_information?.if_media_sensational,
+                    if_media_sensational_text = fridata.data.additional_information?.if_media_sensational == true ? "હા" : fridata.data.additional_information?.if_media_sensational == false ? "ના" : "-",
+                    if_complaint_against_PG = fridata.data.additional_information?.if_complaint_against_PG,
+                    if_complaint_against_PG_text = fridata.data.additional_information?.if_complaint_against_PG == true ? "હા" : fridata.data.additional_information?.if_complaint_against_PG == false ? "ના" : "-",
+                    if_affect_law = fridata.data.additional_information?.if_affect_law,
+                    if_affect_law_text = fridata.data.additional_information?.if_affect_law == true ? "હા" : fridata.data.additional_information?.if_affect_law == false ? "ના" : "-",
+                    if_arresting_accused_affect_law = fridata.data.additional_information?.if_arresting_accused_affect_law,
+                    if_arresting_accused_affect_law_text = fridata.data.additional_information?.if_arresting_accused_affect_law == true ? "હા" : fridata.data.additional_information?.if_arresting_accused_affect_law == false ? "ના" : "-",
+                    if_accused_arrested = fridata.data.additional_information?.if_accused_arrested,
+                    if_accused_arrested_text = fridata.data.additional_information?.if_accused_arrested == true ? "હા" : fridata.data.additional_information?.if_accused_arrested == false ? "ના" : "-",
+                    accused_arrested_reason = fridata.data.additional_information?.accused_arrested_reason,
+                    if_media_link = fridata.data.additional_information?.if_media_link,
+                    if_media_link_text = fridata.data.additional_information?.if_media_link == true ? "હા" : fridata.data.additional_information?.if_media_link == false ? "ના" : "-",
+                    media_link = fridata.data.additional_information?.media_link,
+                    if_social_media_link = fridata.data.additional_information?.if_social_media_link,
+                    if_social_media_link_text = fridata.data.additional_information?.if_social_media_link == true ? "હા" : fridata.data.additional_information?.if_social_media_link == false ? "ના" : "-",
+                    social_media_link = fridata.data.additional_information?.social_media_link,
+                    if_e_evidence_used = fridata.data.additional_information?.if_e_evidence_used,
+                    if_e_evidence_used_text = fridata.data.additional_information?.if_e_evidence_used == true ? "હા" : fridata.data.additional_information?.if_e_evidence_used == false ? "ના" : "-",
+                    additional_accused_list = fridata.data.additional_accused_list?.Select(x => new additional_accused_listDto
+                    {
+                        additional_accused_name = x.additional_accused_name,
+                        additional_accused_address = x.additional_accused_address,
+                        additional_accused_mobileNo = x.additional_accused_mobileNo
+
+                    }).ToList(),
+                    additional_officer_visit = fridata.data.additional_officer_visit?.Select(x => new additional_officer_visitDto
+                    {
+                        additional_officer_name = x.additional_officer_name,
+                        additional_officer_designation = x.additional_officer_designation,
+                        additional_officer_mobileno = x.additional_officer_mobileno,
+                        visit_date = x.visit_date,
+                        visit_time = x.visit_time
+
+                    }).ToList()
+
+
+                };
+
+                return Result<additional_informationDto>.SuccessResult(additional_information, "fechdata succesfull", 1);
+            }
+            else
+            {
+                return Result<additional_informationDto>.FailureResult(fridata.message, 0);
+            }
+        }
+
         public async Task<Result<FRIDetailDto>> getFriDataByid(int id, int userid, int userposition, int rollid)
         {
-          
-                var fridata = await _FriDetails.getFriDataByid(id, userid, userposition, rollid);
+
+            var fridata = await _FriDetails.getFriDataByid(id, userid, userposition, rollid);
+            if (fridata.sucess_code != 0)
+            {
                 var fRIDetailDto = new FRIDetailDto
                 {
                     PS_Details_SCRB = new FRIDetailmasterDto
                     {
-                        recid  = fridata.data.fridetailsmaster?.recid,
+                        recid = fridata.data.fridetailsmaster?.recid,
                         ps_cd = fridata.data.fridetailsmaster?.ps_cd,
-                        ps_name =  fridata.data.fridetailsmaster?.ps_name,
-                        fir_reg_num =fridata.data.fridetailsmaster?.fir_reg_num,
-                        reg_dt =fridata.data.fridetailsmaster?.reg_dt,
-                        state_name =fridata.data.fridetailsmaster?.state_name,
-                        city_district_name  =fridata.data.fridetailsmaster?.city_district_name,
-                        city_district_cd =fridata.data.fridetailsmaster?.city_district_cd,
-                        address =fridata.data.fridetailsmaster?.address,
-                        latitude =fridata.data.fridetailsmaster?.latitude,
-                        longitude =fridata.data.fridetailsmaster?.longitude,
-                        crimehead_desc_guj =fridata.data.fridetailsmaster?.crimehead_desc_guj,
-                        crimehead_id =fridata.data.fridetailsmaster?.crimehead_id,
-                        fir_gist_regional =fridata.data.fridetailsmaster?.fir_gist_regional
+                        ps_name = fridata.data.fridetailsmaster?.ps_name,
+                        fir_reg_num = fridata.data.fridetailsmaster?.fir_reg_num,
+                        reg_dt = fridata.data.fridetailsmaster?.reg_dt,
+                        state_name = fridata.data.fridetailsmaster?.state_name,
+                        city_district_name = fridata.data.fridetailsmaster?.city_district_name,
+                        city_district_cd = fridata.data.fridetailsmaster?.city_district_cd,
+                        address = fridata.data.fridetailsmaster?.address,
+                        latitude = fridata.data.fridetailsmaster?.latitude,
+                        longitude = fridata.data.fridetailsmaster?.longitude,
+                        crimehead_desc_guj = fridata.data.fridetailsmaster?.crimehead_desc_guj,
+                        crimehead_id = fridata.data.fridetailsmaster?.crimehead_id,
+                        fir_gist_regional = fridata.data.fridetailsmaster?.fir_gist_regional
                     },
                     Occurrence_of_Offence = new OccurrenceDetailsDto
-                    { 
-                        to_dt= fridata.data.occurrence_Of_Offence?.to_dt,
+                    {
+                        to_dt = fridata.data.occurrence_Of_Offence?.to_dt,
                         from_time = fridata.data.occurrence_Of_Offence?.from_time,
                         from_dt = fridata.data.occurrence_Of_Offence?.from_dt,
                         to_time = fridata.data.occurrence_Of_Offence?.to_time,
@@ -76,7 +135,7 @@ namespace StateDashbord.Application.Service
 
 
                     },
-                    Visiting_Details_SCRB =new VisitingDetailsDto
+                    Visiting_Details_SCRB = new VisitingDetailsDto
                     {
                         visiting_offcr_name = fridata.data.visiting_details_scrb?.visiting_offcr_name,
                         visiting_offcr_dsgn = fridata.data.visiting_details_scrb?.visiting_offcr_dsgn,
@@ -84,18 +143,18 @@ namespace StateDashbord.Application.Service
                         visiting_time = fridata.data.visiting_details_scrb?.visiting_time
 
                     },
-                    accused_list = fridata.data.accused_Lists?.Select( x=>  new AccusedDetailsDto
+                    accused_list = fridata.data.accused_Lists?.Select(x => new AccusedDetailsDto
                     {
-                        accused_name =x.accused_name,
-                        accused_name_regional =x.accused_name_regional,
-                        accused_age=x.accused_age,
-                        accused_pres_addr=x.accused_pres_addr,
-                        accused_pres_addr_regional =x.accused_pres_addr_regional,
+                        accused_name = x.accused_name,
+                        accused_name_regional = x.accused_name_regional,
+                        accused_age = x.accused_age,
+                        accused_pres_addr = x.accused_pres_addr,
+                        accused_pres_addr_regional = x.accused_pres_addr_regional,
                         accused_national_gender_cd = x.accused_national_gender_cd,
                         accused_occupation = x.accused_occupation
 
                     }).ToList(),
-                    additional_information =new additional_informationDto
+                    additional_information = new additional_informationDto
                     {
                         if_criminal_history = fridata.data.additional_information?.if_criminal_history,
                         if_criminal_history_text = fridata.data.additional_information?.if_criminal_history == true ? "હા" : fridata.data.additional_information?.if_criminal_history == false ? "ના" : "-",
@@ -110,31 +169,31 @@ namespace StateDashbord.Application.Service
                         if_accused_arrested = fridata.data.additional_information?.if_accused_arrested,
                         if_accused_arrested_text = fridata.data.additional_information?.if_accused_arrested == true ? "હા" : fridata.data.additional_information?.if_accused_arrested == false ? "ના" : "-",
                         accused_arrested_reason = fridata.data.additional_information?.accused_arrested_reason,
-                        if_media_link= fridata.data.additional_information?.if_media_link,
+                        if_media_link = fridata.data.additional_information?.if_media_link,
                         if_media_link_text = fridata.data.additional_information?.if_media_link == true ? "હા" : fridata.data.additional_information?.if_media_link == false ? "ના" : "-",
                         media_link = fridata.data.additional_information?.media_link,
                         if_social_media_link = fridata.data.additional_information?.if_social_media_link,
                         if_social_media_link_text = fridata.data.additional_information?.if_social_media_link == true ? "હા" : fridata.data.additional_information?.if_social_media_link == false ? "ના" : "-",
                         social_media_link = fridata.data.additional_information?.social_media_link,
-                        
+
                         if_e_evidence_used = fridata.data.additional_information?.if_e_evidence_used,
                         if_e_evidence_used_text = fridata.data.additional_information?.if_e_evidence_used == true ? "હા" : fridata.data.additional_information?.if_e_evidence_used == false ? "ના" : "-",
 
                     },
                     additional_accused_list = fridata.data.additional_accused_list?.Select(x => new additional_accused_listDto
                     {
-                        additional_accused_name =x.additional_accused_name,
-                        additional_accused_address =x.additional_accused_address,
-                        additional_accused_mobileNo =x.additional_accused_mobileNo
+                        additional_accused_name = x.additional_accused_name,
+                        additional_accused_address = x.additional_accused_address,
+                        additional_accused_mobileNo = x.additional_accused_mobileNo
 
                     }).ToList(),
                     additional_officer_visit = fridata.data.additional_officer_visit?.Select(x => new additional_officer_visitDto
                     {
-                       additional_officer_name =x.additional_officer_name,
-                        additional_officer_designation =x.additional_officer_designation,
-                        additional_officer_mobileno =x.additional_officer_mobileno,
-                        visit_date =x.visit_date,
-                        visit_time =x.visit_time
+                        additional_officer_name = x.additional_officer_name,
+                        additional_officer_designation = x.additional_officer_designation,
+                        additional_officer_mobileno = x.additional_officer_mobileno,
+                        visit_date = x.visit_date,
+                        visit_time = x.visit_time
 
                     }).ToList()
 
@@ -142,13 +201,18 @@ namespace StateDashbord.Application.Service
                 };
 
 
-            return Result<FRIDetailDto>.SuccessResult(fRIDetailDto, "fechdata succesfull", 1);
+                return Result<FRIDetailDto>.SuccessResult(fRIDetailDto, "fechdata succesfull", 1);
+            }
+            else
+            {
+                return Result<FRIDetailDto>.FailureResult(fridata.message, 0);
 
+            }
         }
 
-        public async Task<Result<List<FridataListDto>>> getFriDataByType(int id, int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        public async Task<Result<List<FridataListDto>>> getFriDataByType(int id, int userid, int userposition, int rollid,int addinfo, DateOnly? from_date, DateOnly? to_date)
         {
-            var result = await _FriDetails.getFriDataByType(id, userid, userposition, rollid,from_date,to_date);
+            var result = await _FriDetails.getFriDataByType(id, userid, userposition, rollid, addinfo, from_date,to_date);
 
             var frilistDtoList = result.data.Select(x => new FridataListDto
              {
@@ -162,7 +226,8 @@ namespace StateDashbord.Application.Service
                 address=x.address,
                 fir_gist_regional = x.fir_gist_regional,
                 latitude = x.latitude,
-                longitude = x.longitude
+                longitude = x.longitude,
+                additionalinfoid =x.additionalinfoid
             }).ToList();
 
             return Result<List<FridataListDto>>.SuccessResult(frilistDtoList, "fechdata succesfull", 1);

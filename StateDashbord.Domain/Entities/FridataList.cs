@@ -21,6 +21,7 @@ namespace StateDashbord.Domain.Entities
         public string? fir_gist_regional { get; set; }
         public string? latitude { get; set; }
         public string? longitude { get; set; }
+        public int? additionalinfoid { get; set; }
 
     }
 }

@@ -68,8 +68,6 @@ namespace StateDashbord.Infrastructure.Persistence
             catch (Exception ex)
             {
                 _logger.LogError($"GetDynamicMultipleResultSetsAsync {ex.Message} ");
-
-
                 throw;
             }
            

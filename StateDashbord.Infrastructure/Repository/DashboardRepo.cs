@@ -42,6 +42,31 @@ namespace StateDashbord.Infrastructure.Repository
 
         }
 
+
+
+        public async Task<Result<List<DashbordCount>>> getDashboardcountdataaddinfo(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
+        {
+            try
+            {
+                Dictionary<string, object> dashboardcountdis = new Dictionary<string, object>();
+                dashboardcountdis.Add("userid", userid);
+                dashboardcountdis.Add("userposition", userposition);
+                dashboardcountdis.Add("rollid", rollid);
+                dashboardcountdis.Add("from_date", from_date?.ToString("yyyy-MM-dd"));
+                dashboardcountdis.Add("to_date", to_date?.ToString("yyyy-MM-dd"));
+                var dashborddata = await _dashbordcoutdata.GetAsync("dashbosrdcountaddinfo", dashboardcountdis);
+                return Result<List<DashbordCount>>.SuccessResult(dashborddata, "fechdata succesfull", 1);
+
+            }
+            catch (Exception ex)
+            {
+
+                return Result<List<DashbordCount>>.FailureResult($"An error occurred: {ex.Message}", 0);
+
+            }
+
+        }
+
         public async Task<Result<List<DashbordCount>>> getDashboardcountdataacf(int userid, int userposition, int rollid, DateOnly? from_date, DateOnly? to_date)
         {
             try
