@@ -49,7 +49,7 @@ namespace StateDashbord.API.Controllers
         }
 
         [HttpGet("GetAfterProgramMasterById")]
-        public async Task<ActionResult<Result<program_masterViewDto>>> GetAfterProgramMasterById(int id, int userid, int userposition, int rollid)
+        public async Task<ActionResult<Result<after_program_masterViewDto>>> GetAfterProgramMasterById(int id, int userid, int userposition, int rollid)
         {
             var result = await _programMasterService.getafterProgramMasterById(id, userid, userposition, rollid);
             return Ok(result);
