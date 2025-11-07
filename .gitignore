@@ -282,3 +282,7 @@
 /StateDashbord.API/obj/Release/net8.0/PubTmp/Out/NLog.Extensions.Logging.dll
 /StateDashbord.API/bin/Debug/net8.0/NLog.Extensions.Logging.dll
 /StateDashbord.API/bin/Debug/net8.0/NLog.dll
+*.txt
+*.pubxml
+*.user
+/StateDashbord.API/StateDashbord.API.csproj.user
