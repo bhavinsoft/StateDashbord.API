@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StateDashbord.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,9 @@ namespace StateDashbord.Application.IRepository
 {
     public interface IMongoUserRepository
     {
-      //  Task<List<UserLog>> GetAllAsync();
+        //  Task<List<UserLog>> GetAllAsync();
         //Task InsertAsync(UserLog user);
+
+        Task<Result<int>> InsertJsonmongoAsync(string jsonData);
     }
 }

@@ -42,6 +42,7 @@ namespace StateDashbord.Infrastructure.Infrastructure
             services.AddSingleton<DapperContext>();
             services.Configure<MongoDbSettings>(configuration.GetSection("MongoDbSettings"));
             services.AddSingleton<MongoDbContext>();
+            services.AddScoped<IMongoUserRepository, MongoUserRepository>();
 
             services.AddHttpClient<IFetchFriDetails, FetchFriDetails>();
            services.AddScoped(typeof(IGenericServices<>), typeof(GenericServices<>));
