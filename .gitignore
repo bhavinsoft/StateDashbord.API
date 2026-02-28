@@ -282,3 +282,4 @@
 /StateDashbord.API/obj/Release/net8.0/PubTmp/Out/NLog.Extensions.Logging.dll
 /StateDashbord.API/bin/Debug/net8.0/NLog.Extensions.Logging.dll
 /StateDashbord.API/bin/Debug/net8.0/NLog.dll
+/StateDashbord.API/obj/Debug/net8.0/staticwebassets/msbuild.build.StateDashbord.API.props
