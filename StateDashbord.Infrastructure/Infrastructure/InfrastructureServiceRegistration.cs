@@ -1,11 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using StateDashbord.Application.IRepository;
 using StateDashbord.Application.IService;
+using StateDashbord.Application.Model;
 using StateDashbord.Application.Service;
 using StateDashbord.Infrastructure.Persistence;
 using StateDashbord.Infrastructure.Repository;
     using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +17,7 @@ namespace StateDashbord.Infrastructure.Infrastructure
 {
     public static class InfrastructureServiceRegistration
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
            services.AddTransient<IFriDetailsRepo, FriDetailsRepo>();
            services.AddTransient<IFetchFriDetails, FetchFriDetails>();
@@ -37,6 +40,9 @@ namespace StateDashbord.Infrastructure.Infrastructure
             services.AddTransient<IProgramMasterRepo, ProgramMasterRepo>();
             services.AddTransient<IProgramMasterService, ProgramMasterService>();
             services.AddSingleton<DapperContext>();
+            services.Configure<MongoDbSettings>(configuration.GetSection("MongoDbSettings"));
+            services.AddSingleton<MongoDbContext>();
+
             services.AddHttpClient<IFetchFriDetails, FetchFriDetails>();
            services.AddScoped(typeof(IGenericServices<>), typeof(GenericServices<>));
 
