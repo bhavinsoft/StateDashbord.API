@@ -283,3 +283,9 @@
 /StateDashbord.API/bin/Debug/net8.0/NLog.Extensions.Logging.dll
 /StateDashbord.API/bin/Debug/net8.0/NLog.dll
 /StateDashbord.API/obj/Debug/net8.0/staticwebassets/msbuild.build.StateDashbord.API.props
+/StateDashbord.API/bin/Debug/net8.0/DnsClient.dll
+/StateDashbord.API/bin/Debug/net8.0/MongoDB.Bson.dll
+/StateDashbord.API/bin/Debug/net8.0/MongoDB.Driver.dll
+/StateDashbord.API/bin/Debug/net8.0/SharpCompress.dll
+/StateDashbord.API/bin/Debug/net8.0/Snappier.dll
+/StateDashbord.API/bin/Debug/net8.0/StateDashbord.API.staticwebassets.endpoints.json
